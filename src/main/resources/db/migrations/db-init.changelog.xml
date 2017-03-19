@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="User (generated)" id="1489252003279-1">
+        <createTable tableName="project">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descr" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="price" type="FLOAT8"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1489252003279-2">
+        <addPrimaryKey columnNames="id" constraintName="projectPK" tableName="project"/>
+    </changeSet>
+</databaseChangeLog>
