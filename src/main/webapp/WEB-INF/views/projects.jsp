@@ -36,8 +36,9 @@
         <tr>
             <th width="80">ID</th>
             <th width="120">Name</th>
-            <th width="60">Price</th>
+            <th width="60">Cost</th>
             <th width="120">Description</th>
+            <th width="60">Deadline</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -45,8 +46,9 @@
             <tr>
                 <td align="center">${project.id}</td>
                 <td align="center"><a href="/projectdata/${project.id}" target="_blank">${project.name}</a></td>
-                <td align="center">${project.price}</td>
+                <td align="center">${project.cost}</td>
                 <td align="center">${project.descr}</td>
+                <td align="center">${project.deadline}</td>
                 <td align="center"><a href="<c:url value='/edit/${project.id}'/>">Edit</a></td>
                 <td align="center"><a href="<c:url value='/remove/${project.id}'/>">Delete</a></td>
             </tr>
@@ -85,12 +87,12 @@
         </tr>
         <tr>
             <td>
-                <form:label path="price">
-                    <spring:message text="Price"/>
+                <form:label path="cost">
+                    <spring:message text="Cost"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="price"/>
+                <form:input path="cost"/>
             </td>
         </tr>
         <tr>
@@ -101,6 +103,26 @@
             </td>
             <td>
                 <form:input path="descr"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="demands">
+                    <spring:message text="Project Demands"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="demands"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="deadline">
+                    <spring:message text="Deadline"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="deadline"/>
             </td>
         </tr>
         <tr>

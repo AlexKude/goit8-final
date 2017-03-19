@@ -1,6 +1,7 @@
 package goit.group8.finalproject.model;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="project")
@@ -15,8 +16,12 @@ public class Project {
     private String name;
     @Column(name = "descr")
     private String descr;
-    @Column(name = "price")
-    private double price;
+    @Column(name = "demands")
+    private String demands;
+    @Column(name = "cost")
+    private double cost;
+    @Column(name = "deadline")
+    private Date deadline;
 
     public int getId() {
         return id;
@@ -34,12 +39,12 @@ public class Project {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getCost() {
+        return cost;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public String getDescr() {
@@ -50,13 +55,31 @@ public class Project {
         this.descr = descr;
     }
 
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public String getDemands() {
+        return demands;
+    }
+
+    public void setDemands(String demands) {
+        this.demands = demands;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", descr='" + descr + '\'' +
-                ", price=" + price +
+                ", demands='" + demands + '\'' +
+                ", cost=" + cost +
+                ", deadline=" + deadline +
                 '}';
     }
 }

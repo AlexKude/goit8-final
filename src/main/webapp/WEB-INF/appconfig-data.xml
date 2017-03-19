@@ -57,4 +57,12 @@
         </property>
     </bean>
 
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="changeLog" value="classpath:db/changelog/db.changelog-master.xml" />
+        <property name="defaultSchema" value="public" />
+    </bean>
+
 </beans>
