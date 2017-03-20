@@ -15,6 +15,9 @@ public class ProjectDaoImpl implements ProjectDao {
 
     private SessionFactory sessionFactory;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void addProject(Project p) {
@@ -59,9 +62,4 @@ public class ProjectDaoImpl implements ProjectDao {
 
         return projectList;
     }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
 }

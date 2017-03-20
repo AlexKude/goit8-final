@@ -47,7 +47,7 @@
                 <td align="center">${project.id}</td>
                 <td align="center"><a href="/projectdata/${project.id}" target="_blank">${project.name}</a></td>
                 <td align="center">${project.cost}</td>
-                <td align="center">${project.descr}</td>
+                <td align="center">${project.describe}</td>
                 <td align="center">${project.deadline}</td>
                 <td align="center"><a href="<c:url value='/edit/${project.id}'/>">Edit</a></td>
                 <td align="center"><a href="<c:url value='/remove/${project.id}'/>">Delete</a></td>
@@ -97,12 +97,12 @@
         </tr>
         <tr>
             <td>
-                <form:label path="descr">
+                <form:label path="describe">
                     <spring:message text="Project Description"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="descr"/>
+                <form:input path="describe"/>
             </td>
         </tr>
         <tr>
