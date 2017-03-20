@@ -9,8 +9,7 @@ import java.util.Date;
 public class Project implements Serializable{
 
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -37,10 +36,10 @@ public class Project implements Serializable{
     @JoinColumn(name = "user_id")
     User customer;
 
-    @Column(name = "startDate")
+    @Column(name = "startdate")
     private Date startDate;
 
-    @Column(name = "finishDate")
+    @Column(name = "finishdate")
     private Date finishDate;
 
     @Column(name = "notes")

@@ -1,18 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="User (generated)" id="1489850967343-1">
+    <changeSet author="User (generated)" id="1490043372348-1">
         <createTable tableName="project">
-            <column name="id" type="INT">
-                <constraints nullable="false"/>
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="projectPK"/>
             </column>
             <column name="cost" type="FLOAT8"/>
-            <column name="deadline" type="timestamp"/>
+            <column name="deadline" type="VARCHAR(255)"/>
             <column name="demands" type="VARCHAR(255)"/>
-            <column name="descr" type="VARCHAR(255)"/>
+            <column name="describe" type="VARCHAR(255)"/>
+            <column name="finishdate" type="timestamp"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="notes" type="VARCHAR(255)"/>
+            <column name="startdate" type="timestamp"/>
+            <column name="user_id" type="INT"/>
+            <column name="status_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-2">
+        <createTable tableName="projectStatus">
+            <column autoIncrement="true" name="status_id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="projectStatusPK"/>
+            </column>
+            <column name="status_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-3">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="rolesPK"/>
+            </column>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="User (generated)" id="1489850967343-2">
-        <addPrimaryKey columnNames="id" constraintName="projectPK" tableName="project"/>
+    <changeSet author="User (generated)" id="1490043372348-4">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-5">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="firstname" type="VARCHAR(255)"/>
+            <column name="othercontacts" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="portfolioLinks" type="VARCHAR(255)"/>
+            <column name="secondname" type="VARCHAR(255)"/>
+            <column name="skills" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-6">
+        <addPrimaryKey columnNames="user_id, role_id" tableName="user_roles"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-7">
+        <addUniqueConstraint columnNames="id" constraintName="UC_ROLESID_COL" tableName="roles"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-8">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_roles" constraintName="FK_5q4rc4fh1on6567qk69uesvyf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="roles"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-9">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="project" constraintName="FK_60d0g900v88hwu1mfng1nbewq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-10">
+        <addForeignKeyConstraint baseColumnNames="status_id" baseTableName="project" constraintName="FK_cmq2womflwqgdijyxklbasgdi" deferrable="false" initiallyDeferred="false" referencedColumnNames="status_id" referencedTableName="projectStatus"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1490043372348-11">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="FK_g1uebn6mqk9qiaw45vnacmyo2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
     </changeSet>
 </databaseChangeLog>

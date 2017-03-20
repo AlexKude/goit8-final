@@ -13,10 +13,10 @@ public class User implements Serializable{
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firstName")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "secondName")
+    @Column(name = "secondname")
     private String secondName;
 
     @Column(name = "address")
@@ -28,10 +28,10 @@ public class User implements Serializable{
     @Column(name = "portfolioLinks")
     private String portfolioLinks;
 
-    @Column(name = "eMail")
+    @Column(name = "email")
     private String eMail;
 
-    @Column(name = "otherContacts")
+    @Column(name = "othercontacts")
     private String otherContacts;
 
     @Column(name = "password")
