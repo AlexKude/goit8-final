@@ -54,7 +54,7 @@
     </table>
 </c:if>
 
-<h1>Add Projects</h1>
+<h1>Add Project</h1>
 
 <c:url var="addAction" value="/project/add"/>
 
