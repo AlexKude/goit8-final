@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "projectStatus")
+@Table(name = "projectstatus")
 public class ProjectStatus implements Serializable {
 
     @Id
@@ -37,7 +37,7 @@ public class ProjectStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "ProjectStatus{" +
+        return "Projectstatus{" +
                 "status_id=" + status_id +
                 ", status_name='" + status_name + '\'' +
                 '}';

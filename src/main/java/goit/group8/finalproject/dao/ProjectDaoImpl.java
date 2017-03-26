@@ -1,6 +1,7 @@
 package goit.group8.finalproject.dao;
 
 import goit.group8.finalproject.model.Project;
+import goit.group8.finalproject.model.ProjectStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -22,6 +23,18 @@ public class ProjectDaoImpl implements ProjectDao {
     @Override
     public void addProject(Project p) {
         Session session = sessionFactory.getCurrentSession();
+        if (p.getStatus() == null)
+        {
+            ProjectStatus status = (ProjectStatus) session.get(ProjectStatus.class, new Integer(1));
+            if (status == null)
+            {
+                status = new ProjectStatus();
+                status.setStatus_name("created");
+                //status.setStatus_id(1);
+                session.save(status);
+            }
+            p.setStatus(status);
+        }
         session.save(p);
         logger.info("Goods are added successfully. Project details: "+ p);
     }
