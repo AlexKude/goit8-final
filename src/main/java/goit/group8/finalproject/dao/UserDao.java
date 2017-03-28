@@ -1,11 +1,10 @@
 package goit.group8.finalproject.dao;
 
 import goit.group8.finalproject.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserDao extends JpaRepository{
+public interface UserDao {
 
     void addUser(User user);
 
