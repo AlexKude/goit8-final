@@ -19,6 +19,9 @@ public class User implements Serializable{
     @Column(name = "secondname")
     private String secondName;
 
+    @Column(name = "login")
+    private String login;
+
     @Column(name = "address")
     private String address;
 
@@ -136,19 +139,26 @@ public class User implements Serializable{
         this.roles = roles;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
+                ", login='" + login + '\'' +
                 ", address='" + address + '\'' +
                 ", skills='" + skills + '\'' +
                 ", portfolioLinks='" + portfolioLinks + '\'' +
                 ", eMail='" + eMail + '\'' +
                 ", otherContacts='" + otherContacts + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
                 ", roles=" + roles +
                 '}';
     }

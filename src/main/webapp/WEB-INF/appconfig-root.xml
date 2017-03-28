@@ -10,6 +10,8 @@
 
     <import resource="appconfig-mvc.xml"/>
 
+    <import resource="appconfig-security.xml"/>
+
     <context:component-scan base-package="goit.group8.*"/>
 
     <context:property-placeholder location="classpath:database.properties"/>

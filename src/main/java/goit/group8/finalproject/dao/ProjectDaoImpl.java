@@ -14,9 +14,9 @@ import java.util.List;
 public class ProjectDaoImpl implements ProjectDao {
     private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
 
-    private SessionFactory sessionFactory;
+    SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
+    public ProjectDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
