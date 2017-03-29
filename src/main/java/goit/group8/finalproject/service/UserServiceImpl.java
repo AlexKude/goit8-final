@@ -19,8 +19,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public void setUserDao(goit.group8.finalproject.dao.UserDaoImpl userDao) {
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
+
     @Autowired
     private RoleDao roleDao;
 

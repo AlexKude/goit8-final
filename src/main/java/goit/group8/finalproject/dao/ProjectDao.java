@@ -7,7 +7,7 @@ public interface ProjectDao {
     void addProject(Project g);
     void updateProject(Project g);
     void removeProject(int id);
-    Project getProjectbyId(int id);
+    Project getProjectById(int id);
     List<Project> showProjects();
 }
 

@@ -46,7 +46,7 @@ public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements Pro
     }
 
     @Override
-    public Project getProjectbyId(int id) {
+    public Project getProjectById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Project p = (Project) session.load(Project.class, new Integer(id));//load by id
         logger.info("Project has been loaded successfully. Project details: " + p);
@@ -59,7 +59,6 @@ public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements Pro
     public List<Project> showProjects() {
         Session session = sessionFactory.getCurrentSession();
         List<Project> projectList = session.createQuery("from Project").list();
-
         for (Project p : projectList) {
             logger.info("loaded project details: " + p);
         }

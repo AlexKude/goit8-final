@@ -76,10 +76,5 @@
         <property name="userDao" ref="userDao"/>
     </bean>
 
-  <!--  <bean id="userJpa" class="goit.group8.finalproject.service.UserDetailsServiceImpl">
-        <property name="userJpaDao">
-            <ref bean="userJpaDao"/>
-        </property>
-    </bean>-->
 
 </beans>
