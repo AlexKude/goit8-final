@@ -17,24 +17,22 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
-    /*@Autowired*/
-    private RoleDao roleDao;
-
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
+    public void setUserDao(goit.group8.finalproject.dao.UserDaoImpl userDao) {
     }
+    @Autowired
+    private RoleDao roleDao;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
+    @Transactional("businessData")
     public void addUser(User u) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
         Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getOne(3L));
-        u.setRoles(roles);
+        roles.add(roleDao.findById(3));
         userDao.addUser(u);
      }
 
@@ -42,7 +40,6 @@ public class UserServiceImpl implements UserService {
     @Transactional("businessData")
     public void updateUser(User u) {
         userDao.updateUser(u);
-
     }
 
     @Override
@@ -51,12 +48,14 @@ public class UserServiceImpl implements UserService {
         userDao.removeUser(id);
     }
 
+    @Override
     @Transactional("businessData")
     public User getUserById(int id) {
         return userDao.getUserById(id);
     }
 
     @Override
+    @Transactional("businessData")
     public User findByUsername(String login) {
         return userDao.findByUsername(login);
     }
@@ -67,6 +66,4 @@ public class UserServiceImpl implements UserService {
         return userDao.showUsers();
     }
 
-    public void setUserDao(goit.group8.finalproject.dao.UserDaoImpl userDao) {
-    }
 }

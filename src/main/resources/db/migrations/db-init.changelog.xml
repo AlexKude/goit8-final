@@ -13,4 +13,39 @@
     <changeSet author="User (generated)" id="1489252003279-2">
         <addPrimaryKey columnNames="id" constraintName="projectPK" tableName="project"/>
     </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-1">
+        <addColumn tableName="project">
+            <column defaultValue="nextval(project_proid_seq'::regclass)" name="proid" type="int4">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-2">
+        <dropSequence sequenceName="projectStatus_status_id_seq"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-3">
+        <dropSequence sequenceName="project_id_seq"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-4">
+        <dropSequence sequenceName="roles_id_seq"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-5">
+        <dropSequence sequenceName="users_id_seq"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-6">
+        <dropColumn columnName="demands" tableName="project"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-7">
+        <dropColumn columnName="id" tableName="project"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-8">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="login" tableName="users"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-9">
+        <addDefaultValue columnDataType="int" columnName="status_id" defaultValueComputed="nextval('projectstatus_status_id_seq'::regclass)" tableName="projectStatus"/>
+    </changeSet>
+    <changeSet author="HPg7 (generated)" id="1490746549347-10">
+        <dropPrimaryKey tableName="project"/>
+        <addPrimaryKey columnNames="proid" constraintName="projectPK" tableName="project"/>
+    </changeSet>
 </databaseChangeLog>
