@@ -35,18 +35,18 @@
     <table class="table-hover table-bordered table-striped">
         <tr>
             <th width="80">ID</th>
-            <th width="120">Name</th>
-            <th width="60">Price</th>
-            <th width="120">Description</th>
-            <th width="60">Start_Date</th>
-            <th width="60">Finish_Date</th>
-            <th width="60">Deadline</th>
-            <th width="60">Status</th>
-            <th width="60">Executor</th>
-            <th width="60">Customer</th>
+            <th width="200">Name</th>
+            <th width="80">Price</th>
+            <th width="200">Description</th>
+            <th width="80">Start_Date</th>
+            <th width="80">Finish_Date</th>
+            <th width="80">Deadline</th>
+            <th width="80">Status</th>
+            <th width="80">Executor</th>
+            <th width="120">Customer</th>
             <th width="120">Notes</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
+            <th width="80">Edit</th>
+            <th width="80">Delete</th>
         </tr>
         <c:forEach items="${listProjects}" var="project">
             <tr>
@@ -57,6 +57,9 @@
                 <td align="center">${project.startDate}</td>
                 <td align="center">${project.finishDate}</td>
                 <td align="center">${project.deadline}</td>
+                <td align="center">${project.status}</td>
+                <td align="center"><a href="/freelancerdata/${users.id}" target="_blank">${users.name}</a></td>
+                <td align="center"><a href="/customerdata/${users.id}" target="_blank">${users.name}</a></td>
                 <td align="center">${project.notes}</td>
                 <td align="center"><a href="<c:url value='/edit/${project.id}'/>">Edit</a></td>
                 <td align="center"><a href="<c:url value='/remove/${project.id}'/>">Delete</a></td>
@@ -107,11 +110,81 @@
         <tr>
             <td>
                 <form:label path="describe">
-                    <spring:message text="Project Description"/>
+                    <spring:message text="Description"/>
                 </form:label>
             </td>
             <td>
                 <form:input path="describe"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="startDate">
+                    <spring:message text="Start_Date"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="startDate"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="finishDate">
+                    <spring:message text="Finish_Date"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="finishDate"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="deadline">
+                    <spring:message text="Deadline"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="deadline"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="status">
+                    <spring:message text="Status"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="status"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="executor_id">
+                    <spring:message text="Executor"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="executor_id"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="customer">
+                    <spring:message text="Customer"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="customer"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="notes">
+                    <spring:message text="Notes"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="notes"/>
             </td>
         </tr>
         <tr>
