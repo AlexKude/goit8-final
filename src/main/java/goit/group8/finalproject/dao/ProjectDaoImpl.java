@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("projectDao")
 public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements ProjectDao {
 
     private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);

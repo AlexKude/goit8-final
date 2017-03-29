@@ -33,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     @Transactional("businessData")
     public Project getProjectbyId(int id) {
-        return  projectDao.getProjectbyId(id);
+        return  projectDao.getProjectById(id);
     }
 
     @Override

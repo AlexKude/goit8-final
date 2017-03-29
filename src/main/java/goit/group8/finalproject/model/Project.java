@@ -1,5 +1,4 @@
 package goit.group8.finalproject.model;
-import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,7 +9,7 @@ public class Project implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "proid")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "name")
@@ -32,6 +31,10 @@ public class Project implements Serializable{
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     User customer;
+
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "executor_id")
+    User executor_id;
 
     @Column(name = "startDate")
     private Date startDate;
@@ -101,6 +104,14 @@ public class Project implements Serializable{
         this.customer = customer;
     }
 
+    public User getExecutor_id() {
+        return executor_id;
+    }
+
+    public void setExecutor_id(User executor_id) {
+        this.executor_id = executor_id;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -135,6 +146,7 @@ public class Project implements Serializable{
                 ", deadline='" + deadline + '\'' +
                 ", status=" + status +
                 ", customer=" + customer +
+                ", executor_id=" + executor_id +
                 ", startDate=" + startDate +
                 ", finishDate=" + finishDate +
                 ", notes='" + notes + '\'' +

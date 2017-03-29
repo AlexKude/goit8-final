@@ -38,6 +38,13 @@
             <th width="120">Name</th>
             <th width="60">Price</th>
             <th width="120">Description</th>
+            <th width="60">Start_Date</th>
+            <th width="60">Finish_Date</th>
+            <th width="60">Deadline</th>
+            <th width="60">Status</th>
+            <th width="60">Executor</th>
+            <th width="60">Customer</th>
+            <th width="120">Notes</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -45,8 +52,12 @@
             <tr>
                 <td align="center">${project.id}</td>
                 <td align="center"><a href="/projectdata/${project.id}" target="_blank">${project.name}</a></td>
-                <td align="center">${project.price}</td>
-                <td align="center">${project.descr}</td>
+                <td align="center">${project.cost}</td>
+                <td align="center">${project.describe}</td>
+                <td align="center">${project.startDate}</td>
+                <td align="center">${project.finishDate}</td>
+                <td align="center">${project.deadline}</td>
+                <td align="center">${project.notes}</td>
                 <td align="center"><a href="<c:url value='/edit/${project.id}'/>">Edit</a></td>
                 <td align="center"><a href="<c:url value='/remove/${project.id}'/>">Delete</a></td>
             </tr>
@@ -85,22 +96,22 @@
         </tr>
         <tr>
             <td>
-                <form:label path="price">
+                <form:label path="cost">
                     <spring:message text="Price"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="price"/>
+                <form:input path="cost"/>
             </td>
         </tr>
         <tr>
             <td>
-                <form:label path="descr">
+                <form:label path="describe">
                     <spring:message text="Project Description"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="descr"/>
+                <form:input path="describe"/>
             </td>
         </tr>
         <tr>
