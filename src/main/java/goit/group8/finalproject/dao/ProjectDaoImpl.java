@@ -11,11 +11,12 @@ import java.util.List;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
+
     private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
 
     SessionFactory sessionFactory;
 
-    public ProjectDaoImpl(SessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -55,7 +56,7 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<Project> showProjects() {
         Session session = sessionFactory.getCurrentSession();
-        List<Project> projectList = session.createQuery("select p from " + Project.class.getName() + " p").list();
+        List<Project> projectList = session.createQuery("from Project").list();
         for (Project p : projectList){
             logger.info("loaded project details: "+ p);
         }

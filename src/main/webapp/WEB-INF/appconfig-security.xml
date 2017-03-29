@@ -8,7 +8,8 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/" access="hasAnyRole(
+         'IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
 
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
@@ -24,7 +25,9 @@
     </authentication-manager>
 
     <beans:bean id="userDetailsServiceImpl"
-                class="goit.group8.finalproject.service.UserDetailsServiceImpl"></beans:bean>
+                class="goit.group8.finalproject.service.UserDetailsServiceImpl">
+     <!--   <beans:property name="userJpaDao" ref="userJpaDao"/>-->
+    </beans:bean>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

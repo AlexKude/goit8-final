@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/data/jpa
-    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+
+
     http://www.springframework.org/schema/tx
-    http://www.springframework.org/schema/tx/spring-tx.xsd
-http://www.springframework.org/schema/data/jpa "
+    http://www.springframework.org/schema/tx/spring-tx.xsd"
 >
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -31,16 +29,26 @@ http://www.springframework.org/schema/data/jpa "
         <property name="dataSource">
             <ref bean="dataSource"/>
         </property>
-        <!--property name="packagesToScan" value="module4.goodsmanager.model" /-->
+
         <property name="annotatedClasses">
             <list>
+                <value>goit.group8.finalproject.model.Role</value>
+                <value>goit.group8.finalproject.model.ProjectStatus</value>
+                <value>goit.group8.finalproject.model.User</value>
                 <value>goit.group8.finalproject.model.Project</value>
             </list>
         </property>
-        <property name="hibernateProperties">
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="goit.*"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect
-                </prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
@@ -57,5 +65,21 @@ http://www.springframework.org/schema/data/jpa "
             <ref bean="projectDao"/>
         </property>
     </bean>
+
+    <bean id="userDao" class="goit.group8.finalproject.dao.UserDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="userService" class="goit.group8.finalproject.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+  <!--  <bean id="userJpa" class="goit.group8.finalproject.service.UserDetailsServiceImpl">
+        <property name="userJpaDao">
+            <ref bean="userJpaDao"/>
+        </property>
+    </bean>-->
 
 </beans>
