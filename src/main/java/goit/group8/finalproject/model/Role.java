@@ -15,6 +15,7 @@ public class Role implements Serializable {
 
     @Column(name = "name")
     private String name;
+    private String type = RoleType.FREELANCER.getRoleType();
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
@@ -46,11 +47,20 @@ public class Role implements Serializable {
         this.users = users;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
                 ", users=" + users +
                 '}';
     }
