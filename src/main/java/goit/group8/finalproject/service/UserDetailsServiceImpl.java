@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,15 +18,15 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    /*@Autowired*/
-      private UserJpaDao userJpaDao;
+    @Autowired
+    private UserJpaDao userJpaDao;
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional("security")
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
-        User user = userJpaDao.findByUsername(login);
+        User user = userJpaDao.findByLogin(login);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
         for (Role role : user.getRoles()) {

@@ -28,7 +28,7 @@ public class User implements Serializable{
     @Column(name = "skills")
     private String skills;
 
-    @Column(name = "portfolioLinks")
+    @Column(name = "portfoliolinks")
     private String portfolioLinks;
 
     @Column(name = "email")
@@ -149,7 +149,7 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return "User{" +
+        /*return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
@@ -159,6 +159,11 @@ public class User implements Serializable{
                 ", portfolioLinks='" + portfolioLinks + '\'' +
                 ", eMail='" + eMail + '\'' +
                 ", otherContacts='" + otherContacts + '\'' +
+                ", roles=" + roles +
+                '}';*/
+        return "User{" +
+                "id=" + id +
+                ", login='" + login  + '\'' +
                 ", roles=" + roles +
                 '}';
     }

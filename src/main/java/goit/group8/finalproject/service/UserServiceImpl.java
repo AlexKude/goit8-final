@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    /*@Autowired*/
+    @Autowired
     private RoleDao roleDao;
 
     public void setRoleDao(RoleDao roleDao) {
@@ -30,10 +30,11 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
+    @Transactional("businessData")
     public void addUser(User u) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
         Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getOne(3L));
+        roles.add(roleDao.findOne(3L));
         u.setRoles(roles);
         userDao.addUser(u);
      }
@@ -57,6 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional("businessData")
     public User findByUsername(String login) {
         return userDao.findByUsername(login);
     }
