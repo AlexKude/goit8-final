@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
 
     SessionFactory sessionFactory;
 
-    public UserDaoImpl(SessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -54,9 +54,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByUserName(String login) {
+    public User findByUsername(String login) {
         Session session = sessionFactory.getCurrentSession();
-        User u = (User) session.load(User.class, new Integer(login));//load by login
+        User u = (User) session.load(User.class, new String(login));//load by login
         logger.info("User has been loaded successfully. User details: " + u);
         return u;
     }
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> showUsers() {
         Session session = sessionFactory.getCurrentSession();
-        List<User> userList = session.createQuery("select p from " + User.class.getName() + " p").list();
+        List<User> userList = session.createQuery("select u from " + User.class.getName() + " u").list();
         for (User u : userList) {
             logger.info("loaded user details: " + u);
         }

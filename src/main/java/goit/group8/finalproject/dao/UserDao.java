@@ -14,7 +14,7 @@ public interface UserDao {
 
     User getUserById (int id);
 
-    User findByUserName(String login);
+    User findByUsername(String login);
 
     List<User> showUsers();
 }
