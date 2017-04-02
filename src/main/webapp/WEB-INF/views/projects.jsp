@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -75,17 +76,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                        <span class="col-md-offset-1">
-                                            <a href="<c:url value='/edit/${project.id}'/>">Edit</a>
-                                        </span>
-                                        <span class="col-md-offset-9">
-                                            <a href="<c:url value='/remove/${project.id}'/>">Delete</a>
-                                        </span>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <span class="col-md-offset-1">
+                                                <a href="<c:url value='/edit/${project.id}'/>">Edit</a>
+                                            </span>
+                                            <span class="col-md-offset-9">
+                                                <a href="<c:url value='/remove/${project.id}'/>">Delete</a>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </sec:authorize>
                         </td>
                     </tr>
                 </c:forEach>
@@ -93,7 +96,9 @@
             </c:if>
         </div>
     </div>
-    <div class="row">
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+      <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
             <h1>Add Project:</h1>
 
@@ -180,6 +185,7 @@
             </form:form>
         </div>
     </div>
+</sec:authorize>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

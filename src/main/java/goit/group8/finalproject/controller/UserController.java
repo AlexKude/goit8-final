@@ -60,7 +60,15 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model){
+    public String welcome(Model model, String error, String logout){
+        if (error != null){
+            model.addAttribute("error", "Username or password is incorrect.");
+        }
+
+        if (logout != null){
+            model.addAttribute("message", "Logged out successfully.");
+        }
+
         return "welcome";
     }
 

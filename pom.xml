@@ -12,6 +12,7 @@
     <spring.version>4.3.5.RELEASE</spring.version>
     <spring-security.version>4.0.2.RELEASE</spring-security.version>
     <spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
+    <security-taglib.version>4.0.2.RELEASE</security-taglib.version>
     <hibernate.version>4.3.11.Final</hibernate.version>
     <hibernate-validator.version>5.2.1.Final</hibernate-validator.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
@@ -22,6 +23,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <postgresql.version>9.4.1212</postgresql.version>
+
   </properties>
 
   <dependencies>
@@ -109,8 +111,14 @@
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
     </dependency>
-  </dependencies>
 
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${security-taglib.version}</version>
+    </dependency>
+
+  </dependencies>
 
   <build>
     <finalName>freelancer</finalName>
