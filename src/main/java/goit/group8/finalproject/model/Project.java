@@ -18,6 +18,9 @@ public class Project implements Serializable{
     @Column(name = "describe")
     private String describe;
 
+    @Column(name = "demands")
+    private String demands;
+
     @Column(name = "cost")
     private double cost;
 
@@ -32,14 +35,10 @@ public class Project implements Serializable{
     @JoinColumn(name = "user_id")
     User customer;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "executor_id")
-    User executor_id;
-
-    @Column(name = "startDate")
+    @Column(name = "startdate")
     private Date startDate;
 
-    @Column(name = "finishDate")
+    @Column(name = "finishdate")
     private Date finishDate;
 
     @Column(name = "notes")
@@ -70,6 +69,14 @@ public class Project implements Serializable{
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    public String getDemands() {
+        return demands;
+    }
+
+    public void setDemands(String demands) {
+        this.demands = demands;
     }
 
     public double getCost() {
@@ -104,14 +111,6 @@ public class Project implements Serializable{
         this.customer = customer;
     }
 
-    public User getExecutor_id() {
-        return executor_id;
-    }
-
-    public void setExecutor_id(User executor_id) {
-        this.executor_id = executor_id;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -142,11 +141,11 @@ public class Project implements Serializable{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", describe='" + describe + '\'' +
+                ", demands='" + demands + '\'' +
                 ", cost=" + cost +
                 ", deadline='" + deadline + '\'' +
                 ", status=" + status +
                 ", customer=" + customer +
-                ", executor_id=" + executor_id +
                 ", startDate=" + startDate +
                 ", finishDate=" + finishDate +
                 ", notes='" + notes + '\'' +

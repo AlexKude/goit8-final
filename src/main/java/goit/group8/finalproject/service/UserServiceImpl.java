@@ -1,22 +1,29 @@
 package goit.group8.finalproject.service;
 
+import goit.group8.finalproject.dao.RoleDao;
 import goit.group8.finalproject.dao.UserDao;
+import goit.group8.finalproject.model.Role;
 import goit.group8.finalproject.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    UserDao userDao;
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    @Autowired
+    private RoleDao roleDao;
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Autowired
@@ -26,13 +33,17 @@ public class UserServiceImpl implements UserService {
     @Transactional("businessData")
     public void addUser(User u) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleDao.findOne(3L));
+        u.setRoles(roles);
         userDao.addUser(u);
-    }
+     }
 
     @Override
     @Transactional("businessData")
     public void updateUser(User u) {
         userDao.updateUser(u);
+
     }
 
     @Override
@@ -41,7 +52,6 @@ public class UserServiceImpl implements UserService {
         userDao.removeUser(id);
     }
 
-    @Override
     @Transactional("businessData")
     public User getUserById(int id) {
         return userDao.getUserById(id);
@@ -59,4 +69,6 @@ public class UserServiceImpl implements UserService {
         return userDao.showUsers();
     }
 
+    public void setUserDao(goit.group8.finalproject.dao.UserDaoImpl userDao) {
+    }
 }

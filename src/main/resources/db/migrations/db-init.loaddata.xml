@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+<changeSet author="anton" id="init_load1">
+    <insert tableName="roles">
+        <column name="name" type="varchar(255)" value="ROLE_FREELANCER"/>
+    </insert>
+</changeSet>
+<changeSet author="anton" id="init_load2">
+    <insert tableName="roles">
+        <column name="name" type="varchar(255)" value="ROLE_CUSTOMER"/>
+    </insert>
+</changeSet>
+<changeSet author="anton" id="init_load3">
+    <insert tableName="roles">
+        <column name="name" type="varchar(255)" value="ROLE_ADMIN"/>
+    </insert>
+</changeSet>
+<changeSet author="anton" id="init_load4">
+    <insert tableName="users">
+        <column name="login" type="varchar(255)" value="admin"/>
+        <column name="password" type="varchar(255)" value="$2a$11$cIR8VYGXq5o7bwuucUfCmuvDqQxym7/3kgkwTlOnizoEQ2HLymGnC"/>
+    </insert>
+</changeSet>
+<changeSet author="anton" id="init_load5">
+    <insert tableName="user_roles">
+        <column name="user_id" type="int" value="1"/>
+        <column name="role_id" type="int" value="3"/>
+    </insert>
+</changeSet>
+</databaseChangeLog>

@@ -5,15 +5,16 @@ import goit.group8.finalproject.dao.ProjectDao;
 import goit.group8.finalproject.model.Project;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
-public class ProjectServiceImpl implements ProjectService{
-
+public class ProjectServiceImpl implements ProjectService {
     ProjectDao projectDao;
 
     @Override
     @Transactional("businessData")
     public void addProject(Project p) {
+        p.setStartDate(new Date());
         projectDao.addProject(p);
     }
 
@@ -33,7 +34,7 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     @Transactional("businessData")
     public Project getProjectbyId(int id) {
-        return  projectDao.getProjectById(id);
+        return  projectDao.getProjectbyId(id);
     }
 
     @Override

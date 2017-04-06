@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("userDao")
-public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
+@Repository
+public class UserDaoImpl implements UserDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     SessionFactory sessionFactory;
@@ -24,7 +24,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         Session session = sessionFactory.getCurrentSession();
         session.save(u);
         logger.info("User is added successfully. User details: " + u);
-
     }
 
     @Override
@@ -56,7 +55,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
     @Override
     public User findByUsername(String login) {
         Session session = sessionFactory.getCurrentSession();
-        User u = (User) session.load(User.class, new String(login));//load by login
+        //User u = (User) session.load(User.class, new String(login));//load by login
+        List<User> userList = session.createQuery("select u from " + User.class.getName() + " u where u.login = '" + login +"'").list();
+        User u = userList.isEmpty() ? null : userList.get(0);
         logger.info("User has been loaded successfully. User details: " + u);
         return u;
     }

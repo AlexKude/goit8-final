@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -30,177 +31,161 @@
 <br/>
 <br/>
 
-<h1>Project list</h1>
-<c:if test="${!empty listProjects}">
-    <table class="table-hover table-bordered table-striped">
-        <tr>
-            <th width="80">ID</th>
-            <th width="200">Name</th>
-            <th width="80">Price</th>
-            <th width="200">Description</th>
-            <th width="80">Start_Date</th>
-            <th width="80">Finish_Date</th>
-            <th width="80">Deadline</th>
-            <th width="80">Status</th>
-            <th width="80">Executor</th>
-            <th width="120">Customer</th>
-            <th width="120">Notes</th>
-            <th width="80">Edit</th>
-            <th width="80">Delete</th>
-        </tr>
-        <c:forEach items="${listProjects}" var="project">
-            <tr>
-                <td align="center">${project.id}</td>
-                <td align="center"><a href="/projectdata/${project.id}" target="_blank">${project.name}</a></td>
-                <td align="center">${project.cost}</td>
-                <td align="center">${project.describe}</td>
-                <td align="center">${project.startDate}</td>
-                <td align="center">${project.finishDate}</td>
-                <td align="center">${project.deadline}</td>
-                <td align="center">${project.status}</td>
-                <td align="center"><a href="/freelancerdata/${users.id}" target="_blank">${users.name}</a></td>
-                <td align="center"><a href="/customerdata/${users.id}" target="_blank">${users.name}</a></td>
-                <td align="center">${project.notes}</td>
-                <td align="center"><a href="<c:url value='/edit/${project.id}'/>">Edit</a></td>
-                <td align="center"><a href="<c:url value='/remove/${project.id}'/>">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 panel-body">
+            <h1>Freelance jobs</h1>
+            <c:if test="${!empty listProjects}">
+            <table class="table table-hover borderless table-stripedd">
+                <c:forEach items="${listProjects}" var="project">
+                    <tr>
+                        <td>
+                           <div class="row">
+                                <div class="col-md-12">
+                                    <header>
+                                        <h2 class="m-0">
+                                            <a class="break visited"
+                                               itemprop="url"
+                                               data-o-event-logging
+                                               data-relevance='{}'
+                                               data-position="1"
+                                               href="/projectdata/${project.id}" target="_blank">${project.name}
+                                            </a>
+                                         </h2>
+                                    </header>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
+                                        <strong class="js-type">${project.cost}</strong>
+                                        -
+                                        <span>
+                                                ${project.deadline}
+                                        </span>
+                                            -
+                                        <span>Posted
+                                            ${project.startDate}
+                                        </span>
+                                    </small>
+                                    <div>
+                                            ${project.describe}
+                                    </div>
+                                    <div>
+                                            ${project.demands}
+                                    </div>
+                                </div>
+                            </div>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <span class="col-md-offset-1">
+                                                <a href="<c:url value='/edit/${project.id}'/>">Edit</a>
+                                            </span>
+                                            <span class="col-md-offset-9">
+                                                <a href="<c:url value='/remove/${project.id}'/>">Delete</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </sec:authorize>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+            </c:if>
+        </div>
+    </div>
 
-<h1>Add Project</h1>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-4 panel-body">
+            <h1>Add Project:</h1>
 
-<c:url var="addAction" value="/project/add"/>
+            <c:url var="addAction" value="/project/add"/>
 
-<form:form action="${addAction}" commandName="project">
-    <table class="table-responsive col-md-2">
-        <c:if test="${!empty project.name}">
-            <tr>
-                <td>
-                    <form:label path="id">
-                        <spring:message text="ID"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="id" readonly="true" size="8" disabled="true"/>
-                    <form:hidden path="id"/>
-                </td>
-            </tr>
-        </c:if>
-        <tr>
-            <td>
-                <form:label path="name">
-                    <spring:message text="Project Name"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="name"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="cost">
-                    <spring:message text="Price"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="cost"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="describe">
-                    <spring:message text="Description"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="describe"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="startDate">
-                    <spring:message text="Start_Date"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="startDate"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="finishDate">
-                    <spring:message text="Finish_Date"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="finishDate"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="deadline">
-                    <spring:message text="Deadline"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="deadline"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="status">
-                    <spring:message text="Status"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="status"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="executor_id">
-                    <spring:message text="Executor"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="executor_id"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="customer">
-                    <spring:message text="Customer"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="customer"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="notes">
-                    <spring:message text="Notes"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="notes"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <c:if test="${!empty project.name}">
-                    <input type="submit" class="form-control"
-                           value="<spring:message text="Edit Project"/>"/>
-                </c:if>
-                <c:if test="${empty project.name}">
-                    <input type="submit" class="form-control"
-                           value="<spring:message text="Add Project"/>"/>
-                </c:if>
-            </td>
-        </tr>
-    </table>
-</form:form>
+            <form:form action="${addAction}" commandName="project">
+                <table class="table-responsive">
+                    <c:if test="${!empty project.name}">
+                        <tr>
+                            <td>
+                                <form:label path="id">
+                                    <spring:message text="ID"/>
+                                </form:label>
+                            </td>
+                            <td>
+                                <form:input path="id" readonly="true" size="8" disabled="true"/>
+                                <form:hidden path="id"/>
+                            </td>
+                        </tr>
+                    </c:if>
+                    <tr>
+                        <td>
+                            <form:label path="name">
+                                <spring:message text="Project Name"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:label path="cost">
+                                <spring:message text="Cost"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="cost"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:label path="describe">
+                                <spring:message text="Project Description"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:textarea path="describe"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:label path="demands">
+                                <spring:message text="Project Demands"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:textarea path="demands"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:label path="deadline">
+                                <spring:message text="Deadline"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="deadline"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <c:if test="${!empty project.name}">
+                                <input type="submit" class="form-control"
+                                       value="<spring:message text="Edit Project"/>"/>
+                            </c:if>
+                            <c:if test="${empty project.name}">
+                                <input type="submit" class="form-control"
+                                       value="<spring:message text="Add Project"/>"/>
+                            </c:if>
+                        </td>
+                    </tr>
+                </table>
+            </form:form>
+        </div>
+    </div>
+</sec:authorize>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

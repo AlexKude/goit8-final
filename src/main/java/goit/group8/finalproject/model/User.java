@@ -13,10 +13,10 @@ public class User implements Serializable{
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firstName")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "secondName")
+    @Column(name = "secondname")
     private String secondName;
 
     @Column(name = "login")
@@ -28,13 +28,13 @@ public class User implements Serializable{
     @Column(name = "skills")
     private String skills;
 
-    @Column(name = "portfolioLinks")
+    @Column(name = "portfoliolinks")
     private String portfolioLinks;
 
-    @Column(name = "eMail")
+    @Column(name = "email")
     private String eMail;
 
-    @Column(name = "otherContacts")
+    @Column(name = "othercontacts")
     private String otherContacts;
 
     @Column(name = "password")
@@ -149,7 +149,7 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return "User{" +
+        /*return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
@@ -159,6 +159,11 @@ public class User implements Serializable{
                 ", portfolioLinks='" + portfolioLinks + '\'' +
                 ", eMail='" + eMail + '\'' +
                 ", otherContacts='" + otherContacts + '\'' +
+                ", roles=" + roles +
+                '}';*/
+        return "User{" +
+                "id=" + id +
+                ", login='" + login  + '\'' +
                 ", roles=" + roles +
                 '}';
     }
