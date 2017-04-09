@@ -97,7 +97,7 @@
     </div>
 </div>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
       <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
             <h1>Add Project:</h1>

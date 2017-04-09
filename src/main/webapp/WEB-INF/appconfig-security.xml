@@ -13,7 +13,7 @@
         <intercept-url pattern="/" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
-        <anonymous username="guest" granted-authority='ROLE_CUSTOMER' />
+        <anonymous username="guest" granted-authority='ROLE_FREELANCER' />
         <!--remember-me /-->
 
         <form-login login-page="/welcome" default-target-url="/welcome" authentication-failure-url="/welcome?error"
