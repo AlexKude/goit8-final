@@ -16,5 +16,7 @@ public interface UserDao {
 
     User findByUsername(String login);
 
-    List<User> showUsers();
+    List<User> showUsersByRoleId(int id);
+
+    List<User> showAllUsers();
 }

@@ -1,6 +1,5 @@
 package goit.group8.finalproject.controller;
 
-import goit.group8.finalproject.model.Project;
 import goit.group8.finalproject.model.Role;
 import goit.group8.finalproject.model.User;
 import goit.group8.finalproject.service.SecurityService;
@@ -8,7 +7,6 @@ import goit.group8.finalproject.service.UserService;
 import goit.group8.finalproject.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +14,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.beans.PropertyEditorSupport;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -75,7 +76,6 @@ public class UserController {
         if (error != null){
             model.addAttribute("error", "Username or password is incorrect.");
         }
-
         if (logout != null){
             model.addAttribute("message", "Logged out successfully.");
         }
@@ -115,8 +115,15 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String listUsers(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.showUsers());
+        model.addAttribute("listUsers", this.userService.showAllUsers());
         return "users";
+    }
+
+    @RequestMapping(value = "/freelancers", method = RequestMethod.GET)
+    public String listFreelancers(Model model){
+        model.addAttribute("user", new User());
+        model.addAttribute("listFreelancers", this.userService.showUsersByRoleId(1));
+        return "freelancers";
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
@@ -140,7 +147,7 @@ public class UserController {
     @RequestMapping("/edit_user/{id}")
     public String editUser(@PathVariable("id") int id, Model model){ // we pass id and create model
         model.addAttribute("user", this.userService.getUserById(id));
-        model.addAttribute("listUsers", this.userService.showUsers());
+        model.addAttribute("listUsers", this.userService.showAllUsers());
         model.addAttribute("allRolesList", userService.getAllRoles());
         return "users";
     }

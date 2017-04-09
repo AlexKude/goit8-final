@@ -33,6 +33,12 @@
     <a href="/projects" target="_self">Go to Project list</a>
 </div>
 
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_FREELANCER', 'ROLE_CUSTOMER')">
+    <div class="container-fluid">
+        <a href="/freelancers" target="_self">Go to Freelancer List</a>
+    </div>
+</sec:authorize>
+
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <div class="container-fluid">
         <a href="/admin" target="_self">Go to Admin Page</a>

@@ -12,7 +12,8 @@ public interface UserService {
     void removeUser(int id);
     User getUserById(int id);
     User findByUsername(String login);
-    List<User> showUsers();
+    List<User> showAllUsers();
+    List<User> showUsersByRoleId(int id);
     List<Role> getAllowedRoles();
     List<Role> getAllRoles();
     Role loadRoleById(long id);

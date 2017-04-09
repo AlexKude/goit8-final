@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,7 +63,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> showUsers() {
+    public List<User> showUsersByRoleId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        List<User> userListByRoleId = session.createSQLQuery("SELECT * FROM users u, user_roles ur WHERE ur.user_id = u.id AND ur.role_id = " + id).list();
+        for (Object u : userListByRoleId){
+            logger.info("loaded user (role: " + id + ") details:" + u);
+        }
+
+        return userListByRoleId;
+    }
+
+    @Override
+    public List<User> showAllUsers() {
         Session session = sessionFactory.getCurrentSession();
         List<User> userList = session.createQuery("select u from " + User.class.getName() + " u").list();
         for (User u : userList) {

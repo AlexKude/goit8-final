@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -38,13 +36,12 @@ public class UserServiceImpl implements UserService {
         //roles.add(roleDao.findOne(3L));
         //u.setRoles(roles);
         userDao.addUser(u);
-     }
+    }
 
     @Override
     @Transactional("businessData")
     public void updateUser(User u) {
         userDao.updateUser(u);
-
     }
 
     @Override
@@ -66,8 +63,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional("businessData")
-    public List<User> showUsers() {
-        return userDao.showUsers();
+    public List<User> showAllUsers() {
+
+        return userDao.showAllUsers();
+    }
+
+    @Override
+    @Transactional("businessData")
+    public List<User> showUsersByRoleId(int id) {
+
+        return userDao.showUsersByRoleId(id);
     }
 
     @Override
@@ -75,6 +80,7 @@ public class UserServiceImpl implements UserService {
         List<Role> roles = new ArrayList<>();
         roles.addAll(roleDao.findAll());
         roles.removeIf(r -> r.getName().equals("ROLE_ADMIN"));
+
         return roles;
     }
 
@@ -82,16 +88,16 @@ public class UserServiceImpl implements UserService {
     public List<Role> getAllRoles() {
         List<Role> roles = new ArrayList<>();
         roles.addAll(roleDao.findAll());
+
         return roles;
     }
 
     @Override
     public Role loadRoleById(long id) {
-          return roleDao.findOne(id);
+        return roleDao.findOne(id);
     }
 
-    public void setUserDao(goit.group8.finalproject.dao.UserDaoImpl userDao) {
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
-
-
 }
