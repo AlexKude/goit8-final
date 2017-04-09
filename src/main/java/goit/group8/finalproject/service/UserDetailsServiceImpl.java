@@ -3,6 +3,7 @@ package goit.group8.finalproject.service;
 import goit.group8.finalproject.dao.UserJpaDao;
 import goit.group8.finalproject.model.Role;
 import goit.group8.finalproject.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

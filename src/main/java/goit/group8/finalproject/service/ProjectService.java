@@ -1,6 +1,7 @@
 package goit.group8.finalproject.service;
 
 import goit.group8.finalproject.model.Project;
+
 import java.util.List;
 
 public interface ProjectService {

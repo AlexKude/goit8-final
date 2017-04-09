@@ -30,9 +30,66 @@
 
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
+
+        <spring:bind path="firstName">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="firstName" class="form-control" placeholder="First name"
+                            autofocus="true"></form:input>
+                <form:errors path="firstName"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="secondName">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="secondName" class="form-control" placeholder="Second name"
+                            autofocus="true"></form:input>
+                <form:errors path="secondName"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="address">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="address" class="form-control" placeholder="Address"
+                            autofocus="true"></form:input>
+                <form:errors path="address"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="eMail">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="eMail" class="form-control" placeholder="E-mail"
+                            autofocus="true"></form:input>
+                <form:errors path="eMail"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="otherContacts">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="otherContacts" class="form-control" placeholder="Other contacts"
+                            autofocus="true"></form:input>
+                <form:errors path="otherContacts"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="skills">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="skills" class="form-control" placeholder="Skills"
+                            autofocus="true"></form:input>
+                <form:errors path="skills"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="portfolioLinks">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="portfolioLinks" class="form-control" placeholder="Portfolio Links"
+                            autofocus="true"></form:input>
+                <form:errors path="portfolioLinks"></form:errors>
+            </div>
+        </spring:bind>
+
         <spring:bind path="login">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="login" class="form-control" placeholder="Username"
+                <form:input type="text" path="login" class="form-control" placeholder="Login"
                             autofocus="true"></form:input>
                 <form:errors path="login"></form:errors>
             </div>
@@ -50,6 +107,19 @@
                 <form:input type="password" path="confirmPassword" class="form-control"
                             placeholder="Confirm your password"></form:input>
                 <form:errors path="confirmPassword"></form:errors>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="roles">
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-lable" for="roles">Roles</label>
+                <div class="col-md-7">
+                    <form:select path="roles" items="${roles}" multiple="true" itemValue="id" itemLabel="type"
+                                 class="form-control input-sm"/>
+                    <div class="has-error">
+                        <form:errors path="roles" class="help-inline"/>
+                    </div>
+                </div>
             </div>
         </spring:bind>
 

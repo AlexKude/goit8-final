@@ -12,7 +12,7 @@
          'IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED')"/-->
         <intercept-url pattern="/" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin*" access="hasRole('admin')" />
+        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
         <anonymous username="guest" granted-authority='ROLE_CUSTOMER' />
         <!--remember-me /-->
 

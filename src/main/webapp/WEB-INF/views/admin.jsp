@@ -1,6 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -13,31 +12,30 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome</title>
+    <title>Admin Page</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <div class="starter-template">
-        <h1>Freelancer</h1>
-        <h2>Hire Freelancers & Get Freelance Jobs Online</h2>
-        <ul class="user-links list-inline pull-right">
-            <li><a href="${contextPath}/registration" class="header-link-signup text-uppercase" id="signup">Sign up</a></li><li><a href="/login" class="header-link-login text-uppercase">Login</a></li>
+   <%-- <div class="starter-template">--%>
+        <h1>Welcome to Admin Page</h1>
+        <%--<ul class="user-links list-inline pull-right">
+            <li><a href="${contextPath}/registration" class="header-link-signup text-uppercase" id="signup">Sign up</a>
+            </li>
+            <li><a href="/login" class="header-link-login text-uppercase">Login</a></li>
         </ul>
-    </div>
+    </div>--%>
 </div>
 
 <div class="container-fluid">
     <a href="/projects" target="_self">Go to Project list</a>
 </div>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    <div class="container-fluid">
-        <a href="/admin" target="_self">Go to Admin Page</a>
-    </div>
-</sec:authorize>
+<div class="container-fluid">
+    <a href="/users" target="_self">Go to Users list</a>
+</div>
 
 <div class="container">
 
@@ -52,6 +50,7 @@
     <span>${message}</span>
 
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
