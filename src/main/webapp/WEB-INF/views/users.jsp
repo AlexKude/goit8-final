@@ -37,7 +37,7 @@
             <h1>All Users</h1>
             <c:if test="${!empty listUsers}">
             <table class="table table-hover borderless table-stripedd">
-                <c:forEach items="${listUsers}" var="users">
+                <c:forEach items="${listUsers}" var="user">
                 <tr>
                     <td>
                         <div class="row">
@@ -49,7 +49,7 @@
                                            data-o-event-logging
                                            data-relevance='{}'
                                            data-position="1"
-                                           href="/userdata/${users.id}" target="_blank">${users.login}
+                                           href="/userdata/${user.id}" target="_blank">${user.login}
                                         </a>
                                     </h2>
                                 </header>
@@ -58,82 +58,67 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
-                                    <strong class="js-type">${users.firstName},${users.secondName}</strong>
+                                    <strong class="js-type">${user.firstName},${user.secondName}</strong>
                                     -
                                     <span>
-                                            ${users.id}
+                                            ${user.id} - ${user.address} - ${user.eMail} - ${user.otherContacts} - ${user.portfolioLinks} - ${user.skills} - ${user.roles}
                                     </span>
-                                    -
-                                    <span>
-                                            ${users.address}
-                                    </span>
-                                    -
-                                    <span>
-                                            ${users.eMail}
-                                    </span>
-                                    -
-                                    <span>
-                                            ${users.otherContacts}
-                                    </span>
-                                    -
-                                    <span>
-                                            ${users.portfolioLinks}
-                                    </span>
-                                    -
-                                    <span>
-                                            ${users.skills}
-                                    </span>
-                                    -
-                                    <span>
-                                            ${users.roles}
-                                    </span>
-                                    -
-
+                                </small>
                             </div>
                         </div>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <div class="row">
                             <div class="col-md-12">
                                             <span class="col-md-offset-1">
-                                                <a href="<c:url value='/edit_user/${users.id}'/>">Edit</a>
+                                                <a href="<c:url value='/edit_user/${user.id}'/>">Edit</a>
                                             </span>
                                 <span class="col-md-offset-9">
-                                                <a href="<c:url value='/remove_user/${users.id}'/>">Delete</a>
+                                                <a href="<c:url value='/remove_user/${user.id}'/>">Delete</a>
                                             </span>
                             </div>
                         </div>
+                        </sec:authorize>
+                    </td>
+                </tr>
+            </c:forEach>
+            </table>
+            </c:if>
         </div>
-        </sec:authorize>
-        </td>
-        </tr>
-        </c:forEach>
-        </table>
-        </c:if>
     </div>
 </div>
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
-            <h1>Add User:</h1>
-
-            <c:url var="addAction" value="/user/add"/>
-
+            <c:if test="${!empty user.login}">
+                <h1>User details:</h1>
+                <c:url var="addAction" value="/user/add"/>
             <form:form action="${addAction}" commandName="user">
                 <table class="table-responsive">
-                    <c:if test="${!empty user}">   <%--Need to correct!!!--%>
-                        <tr>
-                            <td>
-                                <form:label path="id">
-                                    <spring:message text="ID"/>
-                                </form:label>
-                            </td>
-                            <td>
-                                <form:input path="id" readonly="true" size="8" disabled="true"/>
-                                <form:hidden path="id"/>
-                            </td>
-                        </tr>
-                    </c:if>
+                    <tr>
+                        <td>
+                            <form:label path="id">
+                                <spring:message text="ID"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="id" readonly="true" size="8" disabled="true"/>
+                            <form:hidden path="id"/>
+                        </td>
+                    </tr>
+		    <tr>
+                        <td>
+                            <form:label path="login">
+                                <spring:message text="Login"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="login" readonly="true" disabled="true"/>
+                            <form:hidden path="login"/>
+                            <form:input path="password" readonly="true" disabled="true" style="display:none;"/>
+                            <form:hidden path="password"/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <form:label path="firstName">
@@ -206,23 +191,65 @@
                     </tr>
                     <tr>
                         <td>
-                            <c:if test="${!empty user}"> <%--Need to correct!!!--%>
+                                <spring:message text="Roles"/>
+                        </td>
+                        <td>
+				<select id="srfull" multiple="true">
+				<c:forEach var="l" items="${allRolesList}">
+					<option value="${l.id}">${l.name}</option>  
+				</c:forEach>
+				</select>
+				<select style="display:none;" id="srcurr" multiple="true">
+				<c:forEach var="l" items="${user.roles}">
+					<option value="${l.id}">${l.name}</option>  
+				</c:forEach>
+				</select>
+
+				<input id="rh" type="hidden" name="roles" value="${user.roles}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                                 <input type="submit" class="form-control"
-                                       value="<spring:message text="Edit User"/>"/>
-                            </c:if>
-                            <c:if test="${empty user}"><%--Need to correct!!!--%>
-                                <input type="submit" class="form-control"
-                                       value="<spring:message text="Add User"/>"/>
-                            </c:if>
+                                       value="<spring:message text="Edit User"/>" onclick="SetRolesForSubmit()" />
                         </td>
                     </tr>
                 </table>
             </form:form>
+            </c:if>
         </div>
     </div>
 </sec:authorize>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+</script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+
+<script>
+function SetSelectedRoles() {
+		var IDs = [];
+		$("#srcurr").find("option").each(function(){IDs.push(this.value);});
+		$("#srfull option").each(function(){
+			if(IDs.indexOf((this).value) >= 0) {
+				$(this).attr("selected","selected");
+			}
+			
+		});				
+        }
+
+	function SetRolesForSubmit() {
+		var IDs = [];
+		var IDs = $("#srfull option:selected").map(function(){
+				return this.value;
+			})
+			.get();
+		$("#rh").val(IDs);
+					
+		//alert($("#rh").val());
+        }
+
+	
+	SetSelectedRoles();
+</script>
 </body>
 </html>

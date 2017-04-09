@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,9 +34,9 @@ public class UserServiceImpl implements UserService {
     @Transactional("businessData")
     public void addUser(User u) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.findOne(3L));
-        u.setRoles(roles);
+        //Set<Role> roles = new HashSet<>();
+        //roles.add(roleDao.findOne(3L));
+        //u.setRoles(roles);
         userDao.addUser(u);
      }
 
@@ -69,6 +70,28 @@ public class UserServiceImpl implements UserService {
         return userDao.showUsers();
     }
 
+    @Override
+    public List<Role> getAllowedRoles() {
+        List<Role> roles = new ArrayList<>();
+        roles.addAll(roleDao.findAll());
+        roles.removeIf(r -> r.getName().equals("ROLE_ADMIN"));
+        return roles;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        List<Role> roles = new ArrayList<>();
+        roles.addAll(roleDao.findAll());
+        return roles;
+    }
+
+    @Override
+    public Role loadRoleById(long id) {
+          return roleDao.findOne(id);
+    }
+
     public void setUserDao(goit.group8.finalproject.dao.UserDaoImpl userDao) {
     }
+
+
 }

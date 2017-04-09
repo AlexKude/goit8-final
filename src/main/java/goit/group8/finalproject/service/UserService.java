@@ -1,5 +1,6 @@
 package goit.group8.finalproject.service;
 
+import goit.group8.finalproject.model.Role;
 import goit.group8.finalproject.model.User;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface UserService {
     User getUserById(int id);
     User findByUsername(String login);
     List<User> showUsers();
+    List<Role> getAllowedRoles();
+    List<Role> getAllRoles();
+    Role loadRoleById(long id);
+
 }

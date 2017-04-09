@@ -112,9 +112,9 @@
 
         <spring:bind path="roles">
             <div class="form-group col-md-12">
-                <label class="col-md-3 control-lable" for="roles">Roles</label>
-                <div class="col-md-7">
-                    <form:select path="roles" items="${roles}" multiple="true" itemValue="id" itemLabel="type"
+                <label class="col-md-2 control-lable" for="roles">Roles</label>
+                <div class="col-md-10">
+                    <form:select path="roles" items="${rolesList}" multiple="true" itemValue="id" itemLabel="name"
                                  class="form-control input-sm"/>
                     <div class="has-error">
                         <form:errors path="roles" class="help-inline"/>

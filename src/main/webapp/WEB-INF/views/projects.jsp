@@ -85,7 +85,6 @@
                                             <span class="col-md-offset-9">
                                                 <a href="<c:url value='/remove/${project.id}'/>">Delete</a>
                                             </span>
-                                        </div>
                                     </div>
                                 </div>
                             </sec:authorize>
@@ -96,6 +95,7 @@
             </c:if>
         </div>
     </div>
+</div>
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
       <div class="row">

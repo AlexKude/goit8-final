@@ -1,19 +1,22 @@
 package goit.group8.finalproject.controller;
 
 import goit.group8.finalproject.model.Project;
+import goit.group8.finalproject.model.Role;
 import goit.group8.finalproject.model.User;
 import goit.group8.finalproject.service.SecurityService;
 import goit.group8.finalproject.service.UserService;
 import goit.group8.finalproject.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import java.beans.PropertyEditorSupport;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -31,6 +34,9 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
+        List<Role> roles = new ArrayList<Role>();
+        roles = userService.getAllowedRoles();
+        model.addAttribute("rolesList", roles);
 
         return "registration";
     }
@@ -44,6 +50,7 @@ public class UserController {
         }
 
         userService.addUser(userForm);
+
 
         securityService.autoLogin(userForm.getLogin(), userForm.getConfirmPassword());
 
@@ -106,8 +113,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String listProject(Model model){
-        model.addAttribute("user", new Project());
+    public String listUsers(Model model){
+        model.addAttribute("user", new User());
         model.addAttribute("listUsers", this.userService.showUsers());
         return "users";
     }
@@ -134,6 +141,7 @@ public class UserController {
     public String editUser(@PathVariable("id") int id, Model model){ // we pass id and create model
         model.addAttribute("user", this.userService.getUserById(id));
         model.addAttribute("listUsers", this.userService.showUsers());
+        model.addAttribute("allRolesList", userService.getAllRoles());
         return "users";
     }
 
@@ -141,5 +149,68 @@ public class UserController {
     public String userData(@PathVariable("id") int id, Model model){ // we pass id and create model
         model.addAttribute("user", this.userService.getUserById(id));
         return "userdata";//return userData page
+    }
+
+    /*@org.springframework.web.bind.annotation.InitBinder("userForm")
+    protected void initBinder(
+            org.springframework.web.bind.WebDataBinder binder) {
+        binder.registerCustomEditor(Role.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                Role r = new Role();
+                r.setId(Long.parseLong(text));
+                setValue(r);
+            }
+        });
+    }*/
+
+
+    @InitBinder({"user","userForm","role","roles"})
+    protected void initBinder(WebDataBinder binder) {
+        /*binder.registerCustomEditor(Set.class, "roles", new CustomCollectionEditor(Set.class)
+        {
+            @Override
+            protected Object convertElement(Object element)
+            {
+                Long id = null;
+
+                if(element instanceof String && !((String)element).equals("")){
+                    //From the JSP 'element' will be a String
+                    try{
+                        id = Long.parseLong((String) element);
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Element was " + ((String) element));
+                        e.printStackTrace();
+                    }
+                }
+                else if(element instanceof Long) {
+                    //From the database 'element' will be a Long
+                    id = (Long) element;
+                }
+
+                return id != null ? userService.loadRoleById(id) : null;
+            }
+        });*/
+
+        binder.registerCustomEditor(Set.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                String[] ids = text.split(",");
+                Set<Role> roles = new HashSet<Role>();
+                for(String str : ids) {
+                    Role r = new Role();
+                    r.setId(Long.parseLong(str));
+                    roles.add(r);
+                }
+                setValue(roles);
+            }
+
+           /*@Override
+            public String getAsText() {
+                Object value = getValue();
+                return (value != null ? value.toString() : "");
+            }*/
+        });
     }
 }
