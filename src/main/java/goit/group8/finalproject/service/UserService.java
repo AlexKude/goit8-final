@@ -13,7 +13,7 @@ public interface UserService {
     User getUserById(int id);
     User findByUsername(String login);
     List<User> showAllUsers();
-    List<User> showUsersByRoleId(int id);
+    List<User> showUsersByRoleId(int rId);
     List<Role> getAllowedRoles();
     List<Role> getAllRoles();
     Role loadRoleById(long id);

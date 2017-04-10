@@ -35,33 +35,34 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1 panel-body">
             <h1>Freelancers</h1>
-           <%-- <c:if test="${!empty listFreelancers}">
+            <c:if test="${!empty listFreelancers}">
                 <table class="table table-hover borderless table-stripedd">
-                    <c:forEach items="${listFreelancers}" var="user">
+                    <c:forEach items="${listFreelancers}" var="freelancer">
                         <tr>
                             <td>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <header>
                                             <h2 class="m-0">
-                                            <a class="break visited"
-                                               itemprop="url"
-                                               data-o-event-logging
-                                               data-relevance='{}'
-                                               data-position="1"
-                                               href="/userdata/${user.id}" target="_blank">${user.login}
-                                            </a>
-                                        </h2>
+                                                <a class="break visited"
+                                                   itemprop="url"
+                                                   data-o-event-logging
+                                                   data-relevance='{}'
+                                                   data-position="1"
+                                                   href="/userdata/${freelancer[0]}" target="_blank">${freelancer[4]}
+                                                </a>
+                                            </h2>
                                         </header>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
-                                            <strong class="js-type">${user.firstName},${user.secondName}</strong>
+                                            <strong class="js-type">${freelancer[4]},${freelancer[9]}</strong>
                                             -
                                             <span>
-                                            ${user.id} - ${user.address} - ${user.eMail} - ${user.otherContacts} - ${user.portfolioLinks} - ${user.skills} - ${user.roles}
+                                            ${freelancer[0]} - ${freelancer[1]} - ${freelancer[2]} - ${freelancer[3]} -
+                                            ${freelancer[4]} - ${freelancer[5]} - ${freelancer[7]} - ${freelancer[8]} - ${freelancer[9]} -
                                     </span>
                                         </small>
                                     </div>
@@ -71,10 +72,10 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="col-md-offset-1">
-                                                <a href="<c:url value='/edit_user/${user.id}'/>">Edit</a>
+                                                <a href="<c:url value='/edit_user/${freelancer[0]}'/>">Edit</a>
                                             </span>
                                             <span class="col-md-offset-9">
-                                                <a href="<c:url value='/remove_user/${user.id}'/>">Delete</a>
+                                                <a href="<c:url value='/remove_user/${freelancer[0]}'/>">Delete</a>
                                             </span>
                                         </div>
                                     </div>
@@ -84,12 +85,12 @@
                         </tr>
                     </c:forEach>
                 </table>
-            </c:if>--%>
+            </c:if>
         </div>
     </div>
 </div>
 
-<%--<sec:authorize access="hasRole('ROLE_ADMIN')">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
     <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
             <c:if test="${!empty user.login}">
@@ -213,7 +214,7 @@
                         <tr>
                             <td>
                                 <input type="submit" class="form-control"
-                                       value="<spring:message text="Edit User"/>" onclick="SetRolesForSubmit()" />
+                                       value="<spring:message text="Edit User"/>" onclick="SetRolesForSubmit()"/>
                             </td>
                         </tr>
                     </table>
@@ -222,7 +223,6 @@
         </div>
     </div>
 </sec:authorize>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
 </script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
@@ -230,10 +230,12 @@
 <script>
     function SetSelectedRoles() {
         var IDs = [];
-        $("#srcurr").find("option").each(function(){IDs.push(this.value);});
-        $("#srfull option").each(function(){
-            if(IDs.indexOf((this).value) >= 0) {
-                $(this).attr("selected","selected");
+        $("#srcurr").find("option").each(function () {
+            IDs.push(this.value);
+        });
+        $("#srfull option").each(function () {
+            if (IDs.indexOf((this).value) >= 0) {
+                $(this).attr("selected", "selected");
             }
 
         });
@@ -241,7 +243,7 @@
 
     function SetRolesForSubmit() {
         var IDs = [];
-        var IDs = $("#srfull option:selected").map(function(){
+        var IDs = $("#srfull option:selected").map(function () {
             return this.value;
         })
             .get();
@@ -252,6 +254,6 @@
 
 
     SetSelectedRoles();
-</script>--%>
+</script>
 </body>
 </html>

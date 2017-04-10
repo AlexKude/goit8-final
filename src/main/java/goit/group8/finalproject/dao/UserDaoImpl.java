@@ -63,12 +63,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> showUsersByRoleId(int id) {
+    public List<User> showUsersByRoleId(int rId) {
         Session session = sessionFactory.getCurrentSession();
-        List<User> userListByRoleId = session.createSQLQuery("SELECT * FROM users u, user_roles ur WHERE ur.user_id = u.id AND ur.role_id = " + id).list();
-        for (Object u : userListByRoleId){
-            logger.info("loaded user (role: " + id + ") details:" + u);
-        }
+        List<User> userListByRoleId = session.createSQLQuery("SELECT * FROM users u, user_roles ur WHERE ur.user_id = u.id AND ur.role_id = " + rId).list();
+
+        /*for (User u : userListByRoleId){
+            logger.info("loaded user (role: " + rId + ") details:" + u);
+        }*/
 
         return userListByRoleId;
     }

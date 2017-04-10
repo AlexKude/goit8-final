@@ -22,7 +22,6 @@ import java.util.Set;
 @Controller
 public class UserController {
 
-
     @Autowired
     private UserService userService;
 
@@ -121,7 +120,7 @@ public class UserController {
 
     @RequestMapping(value = "/freelancers", method = RequestMethod.GET)
     public String listFreelancers(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("freelancer", new User());
         model.addAttribute("listFreelancers", this.userService.showUsersByRoleId(1));
         return "freelancers";
     }

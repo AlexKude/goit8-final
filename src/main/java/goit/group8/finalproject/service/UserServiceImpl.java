@@ -70,9 +70,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional("businessData")
-    public List<User> showUsersByRoleId(int id) {
+    public List<User> showUsersByRoleId(int rId) {
 
-        return userDao.showUsersByRoleId(id);
+        return userDao.showUsersByRoleId(rId);
     }
 
     @Override
