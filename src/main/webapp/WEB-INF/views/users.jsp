@@ -59,9 +59,10 @@
                                     <div class="col-md-12">
                                         <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
                                             <strong class="js-type">${user.firstName},${user.secondName}</strong>
+                                            <strong class="js-type">User ID:  ${user.id} </strong>
                                             -
                                             <span>
-                                            ${user.id} - ${user.address} - ${user.eMail} - ${user.otherContacts} - ${user.portfolioLinks} - ${user.skills} - ${user.roles}
+                                           ${user.address} - ${user.eMail} - ${user.otherContacts} - ${user.portfolioLinks} - ${user.skills} - ${user.roles}
                                     </span>
                                         </small>
                                     </div>

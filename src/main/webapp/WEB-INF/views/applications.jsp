@@ -34,10 +34,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 panel-body">
-            <h1>Freelance jobs</h1>
-            <c:if test="${!empty listProjects}">
+            <h1>Applicants List</h1>
+            <c:if test="${!empty listApps}">
                 <table class="table table-hover borderless table-stripedd">
-                    <c:forEach items="${listProjects}" var="project">
+                    <c:forEach items="${listApps}" var="application">
                         <tr>
                             <td>
                                 <div class="row">
@@ -49,7 +49,7 @@
                                                    data-o-event-logging
                                                    data-relevance='{}'
                                                    data-position="1"
-                                                   href="/projectdata/${project.id}" target="_blank">${project.name}
+                                                   href="/userdata/${application.id}" target="_blank">${application.freelancer}
                                                 </a>
                                             </h2>
                                         </header>
@@ -58,46 +58,32 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
-                                            <strong class="js-type">Project ID: ${project.id}</strong>
-                                            <strong class="js-type">${project.cost}</strong>
+                                            <strong class="js-type">${application.project}</strong>
                                             -
-                                            <span>
-                                                    ${project.deadline}
-                                            </span>
-                                            -
+
                                             <span>Posted
-                                            ${project.startDate}
+                                            ${application.applydate}
                                         </span>
                                         </small>
                                         <div>
-                                                ${project.describe}
+                                                ${application.note}
                                         </div>
-                                        <div>
-                                                ${project.demands}
-                                        </div>
+
                                     </div>
                                 </div>
                                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="col-md-offset-1">
-                                                <a href="<c:url value='/edit/${project.id}'/>">Edit</a>
+                                                <a href="<c:url value='/edit_app/${application.id}'/>">Edit</a>
                                             </span>
                                             <span class="col-md-offset-9">
-                                                <a href="<c:url value='/remove/${project.id}'/>">Delete</a>
+                                                <a href="<c:url value='/remove_app/${application.id}'/>">Delete</a>
                                             </span>
                                         </div>
                                     </div>
                                 </sec:authorize>
-                                <sec:authorize access="hasRole('ROLE_FREELANCER')">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span class="col-md-offset-9">
-                                                <a href="<c:url value='/applications'/>">APPLY</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </sec:authorize>
+
                             </td>
                         </tr>
                     </c:forEach>
@@ -107,16 +93,16 @@
     </div>
 </div>
 
-<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_FREELANCER')">
     <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
-            <h1>Add Project:</h1>
+            <h1>Add Application:</h1>
 
-            <c:url var="addAction" value="/project/add"/>
+            <c:url var="addAction" value="/application/add"/>
 
-            <form:form action="${addAction}" commandName="project">
+            <form:form action="${addAction}" commandName="application">
                 <table class="table-responsive">
-                    <c:if test="${!empty project.name}">
+                    <c:if test="${!empty application.project}">
                         <tr>
                             <td>
                                 <form:label path="id">
@@ -131,63 +117,43 @@
                     </c:if>
                     <tr>
                         <td>
-                            <form:label path="name">
-                                <spring:message text="Project Name"/>
+                            <form:label path="project">
+                                <spring:message text="Project ID"/>
                             </form:label>
                         </td>
                         <td>
-                            <form:input path="name"/>
+                            <form:input path="project"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <form:label path="cost">
-                                <spring:message text="Cost"/>
+                            <form:label path="freelancer">
+                                <spring:message text="Freelancer ID"/>
                             </form:label>
                         </td>
                         <td>
-                            <form:input path="cost"/>
+                            <form:input path="freelancer"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <form:label path="describe">
-                                <spring:message text="Project Description"/>
+                            <form:label path="note">
+                                <spring:message text="Note"/>
                             </form:label>
                         </td>
                         <td>
-                            <form:textarea path="describe"/>
+                            <form:textarea path="note"/>
                         </td>
                     </tr>
-                    <tr>
+
                         <td>
-                            <form:label path="demands">
-                                <spring:message text="Project Demands"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:textarea path="demands"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="deadline">
-                                <spring:message text="Deadline"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:input path="deadline"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <c:if test="${!empty project.name}">
+                            <c:if test="${!empty application.project}">
                                 <input type="submit" class="form-control"
-                                       value="<spring:message text="Edit Project"/>"/>
+                                       value="<spring:message text="Edit Application"/>"/>
                             </c:if>
-                            <c:if test="${empty project.name}">
+                            <c:if test="${empty application.project}">
                                 <input type="submit" class="form-control"
-                                       value="<spring:message text="Add Project"/>"/>
+                                       value="<spring:message text="Add Application"/>"/>
                             </c:if>
                         </td>
                     </tr>

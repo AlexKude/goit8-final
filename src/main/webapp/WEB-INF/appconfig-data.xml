@@ -49,6 +49,17 @@
         </property>
     </bean>
 
+    <bean id="appDao" class="goit.group8.finalproject.dao.ApplicationDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="appService" class="goit.group8.finalproject.service.ApplicationServiceImpl">
+        <property name="appDao">
+            <ref bean="appDao"/>
+        </property>
+    </bean>
 
     <bean id="projectDao" class="goit.group8.finalproject.dao.ProjectDaoImpl">
         <property name="sessionFactory">
