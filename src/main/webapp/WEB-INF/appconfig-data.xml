@@ -44,6 +44,7 @@
                 <value>goit.group8.finalproject.model.ProjectStatus</value>
                 <value>goit.group8.finalproject.model.User</value>
                 <value>goit.group8.finalproject.model.Project</value>
+                <value>goit.group8.finalproject.model.Application</value>
             </list>
         </property>
     </bean>

@@ -2,6 +2,8 @@ package goit.group8.finalproject.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="project")
@@ -34,6 +36,9 @@ public class Project implements Serializable{
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     User customer;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    private Set<Application> applications;
 
     @Column(name = "startdate")
     private Date startDate;
