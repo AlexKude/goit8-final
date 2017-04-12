@@ -49,7 +49,8 @@
                                                    data-o-event-logging
                                                    data-relevance='{}'
                                                    data-position="1"
-                                                   href="/userdata/${application.id}" target="_blank">${application.freelancer}
+                                                   href="/userdata/${application.id}"
+                                                   target="_blank">${application.freelancer}
                                                 </a>
                                             </h2>
                                         </header>
@@ -79,6 +80,16 @@
                                             </span>
                                             <span class="col-md-offset-9">
                                                 <a href="<c:url value='/remove_app/${application.id}'/>">Delete</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </sec:authorize>
+
+                                <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="col-md-offset-9">
+                                                <a href="<c:url value='/freelancers'/>">CHOOSE</a>  <%--To the /freelancers or to???--%>
                                             </span>
                                         </div>
                                     </div>
@@ -115,26 +126,26 @@
                             </td>
                         </tr>
                     </c:if>
-                    <tr>
-                        <td>
-                            <form:label path="project">
-                                <spring:message text="Project ID"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:input path="project"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="freelancer">
-                                <spring:message text="Freelancer ID"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:input path="freelancer"/>
-                        </td>
-                    </tr>
+                        <%-- <tr>
+                             <td>
+                                 <form:label path="project">
+                                     <spring:message text="Project ID"/>
+                                 </form:label>
+                             </td>
+                             <td>
+                                 <form:input path="project"/>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td>
+                                 <form:label path="freelancer">
+                                     <spring:message text="Freelancer ID"/>
+                                 </form:label>
+                             </td>
+                             <td>
+                                 <form:input path="freelancer"/>
+                             </td>
+                         </tr>--%>
                     <tr>
                         <td>
                             <form:label path="note">
@@ -146,16 +157,16 @@
                         </td>
                     </tr>
 
-                        <td>
-                            <c:if test="${!empty application.project}">
-                                <input type="submit" class="form-control"
-                                       value="<spring:message text="Edit Application"/>"/>
-                            </c:if>
-                            <c:if test="${empty application.project}">
-                                <input type="submit" class="form-control"
-                                       value="<spring:message text="Add Application"/>"/>
-                            </c:if>
-                        </td>
+                    <td>
+                        <c:if test="${!empty application.project}">
+                            <input type="submit" class="form-control"
+                                   value="<spring:message text="Edit Application"/>"/>
+                        </c:if>
+                        <c:if test="${empty application.project}">
+                            <input type="submit" class="form-control"
+                                   value="<spring:message text="Add Application"/>"/>
+                        </c:if>
+                    </td>
                     </tr>
                 </table>
             </form:form>

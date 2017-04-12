@@ -23,13 +23,13 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     @Transactional("businessData")
     public void updateApp(Application a) {
-     appDao.updateApp(a);
+        appDao.updateApp(a);
     }
 
     @Override
     @Transactional("businessData")
     public void removeApp(int id) {
-     appDao.removeApp(id);
+        appDao.removeApp(id);
     }
 
     @Override

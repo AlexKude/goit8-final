@@ -45,6 +45,12 @@
     </div>
 </sec:authorize>
 
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
+    <div class="container-fluid">
+        <a href="/applications" target="_self">Go to Applications List</a>
+    </div>
+</sec:authorize>
+
 <div class="container">
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
