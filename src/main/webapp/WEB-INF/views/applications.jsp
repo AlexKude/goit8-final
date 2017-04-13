@@ -126,7 +126,7 @@
                             </td>
                         </tr>
                     </c:if>
-                         <tr>
+                        <%-- <tr>
                              <td>
                                  <form:label path="project">
                                      <spring:message text="Project ID"/>
@@ -135,7 +135,7 @@
                              <td>
                                  <form:input path="project"/>
                              </td>
-                         </tr>
+                         </tr>--%>
 
                     <tr>
                         <td>
@@ -149,11 +149,11 @@
                     </tr>
 
                     <td>
-                        <c:if test="${!empty application.project}">
+                        <c:if test="${!empty application.applydate}">
                             <input type="submit" class="form-control"
                                    value="<spring:message text="Edit Application"/>"/>
                         </c:if>
-                        <c:if test="${empty application.project}">
+                        <c:if test="${empty application.applydate}">
                             <input type="submit" class="form-control"
                                    value="<spring:message text="Add Application"/>"/>
                         </c:if>
