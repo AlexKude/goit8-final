@@ -94,4 +94,19 @@
     <changeSet author="User (generated)" id="1491861270216-14">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="FK_g1uebn6mqk9qiaw45vnacmyo2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
     </changeSet>
+    <changeSet author="vvo12 (generated)" id="1491974394564-1">
+        <dropSequence sequenceName="application_id_seq"/>
+    </changeSet>
+    <changeSet author="vvo12 (generated)" id="1491974394564-2">
+        <dropSequence sequenceName="project_id_seq"/>
+    </changeSet>
+    <changeSet author="vvo12 (generated)" id="1491974394564-3">
+        <dropSequence sequenceName="projectstatus_status_id_seq"/>
+    </changeSet>
+    <changeSet author="vvo12 (generated)" id="1491974394564-4">
+        <dropSequence sequenceName="roles_id_seq"/>
+    </changeSet>
+    <changeSet author="vvo12 (generated)" id="1491974394564-5">
+        <dropSequence sequenceName="users_id_seq"/>
+    </changeSet>
 </databaseChangeLog>

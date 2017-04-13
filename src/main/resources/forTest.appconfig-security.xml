@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http use-expressions="true">
+        <!--intercept-url pattern="/" access="hasAnyRole(
+         'IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED')"/-->
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
+        <anonymous username="guest" granted-authority='ROLE_FREELANCER' />
+        <!--remember-me /-->
+
+        <form-login login-page="/welcome" default-target-url="/welcome" authentication-failure-url="/welcome?error"
+                    username-parameter="login" password-parameter="password"/>
+
+
+        <logout logout-success-url="/welcome?logout"/>
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl"
+                class="goit.group8.finalproject.service.UserDetailsServiceImpl">
+     <!--beans:property name="userJpaDao" ref="userJpaDao"/-->
+    </beans:bean>
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+
+</beans:beans>
