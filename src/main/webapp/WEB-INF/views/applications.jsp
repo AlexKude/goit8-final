@@ -109,7 +109,7 @@
         <div class="col-md-6 col-md-offset-4 panel-body">
             <h1>Add Application:</h1>
 
-            <c:url var="addAction" value="/application/add/{proj_id}"/>
+            <c:url var="addAction" value="/application/add"/>
 
             <form:form action="${addAction}" commandName="application">
                 <table class="table-responsive">

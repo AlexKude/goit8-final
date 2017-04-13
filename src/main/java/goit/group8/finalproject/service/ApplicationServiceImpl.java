@@ -28,16 +28,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     @Transactional("businessData")
-    public void addApp(Application a, int projId) {
+    public void addApp(Application a/*, int projId*/) {
         a.setApplydate(new Date());
         a.setFreelancer(userDao.getUserById(securityService.getCurrentUserId()));
-        a.setProject(projectDao.getProjectbyId(projId));
+       /* a.setProject(projectDao.getProjectbyId(projId));*/
         appDao.addApp(a);
     }
 
     @Override
     @Transactional("businessData")
-    public void updateApp(Application a, int projId) {
+    public void updateApp(Application a) {
         appDao.updateApp(a);
     }
 
