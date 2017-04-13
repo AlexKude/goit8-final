@@ -5,7 +5,7 @@ import goit.group8.finalproject.model.Application;
 import java.util.List;
 
 public interface ApplicationService {
-    void addApp(Application a);
+    void addApp(Application a) throws NoSuchFieldException, IllegalAccessException;
     void updateApp(Application a);
     void removeApp(int id);
     Application getAppById(int id);

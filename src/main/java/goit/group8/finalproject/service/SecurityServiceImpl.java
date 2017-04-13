@@ -1,5 +1,6 @@
 package goit.group8.finalproject.service;
 
+import goit.group8.finalproject.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,17 @@ public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
+    @Override
+    public int getCurrentUserId() {
+        User userId = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userId.getId();
+    }
+
     @Override
     public String findLoggedInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if(userDetails instanceof UserDetails){
+        if (userDetails instanceof UserDetails) {
             return ((UserDetails) userDetails).getUsername();
         }
 
@@ -39,7 +47,7 @@ public class SecurityServiceImpl implements SecurityService {
 
         authenticationManager.authenticate(authenticationToken);
 
-        if(authenticationToken.isAuthenticated()){
+        if (authenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 

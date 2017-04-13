@@ -51,6 +51,10 @@
     </div>
 </sec:authorize>
 
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal.displayName" />
+</sec:authorize>
+
 <div class="container">
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
