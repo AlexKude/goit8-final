@@ -1,5 +1,6 @@
 package goit.group8.finalproject.service;
 
+import goit.group8.finalproject.dao.UserDao;
 import goit.group8.finalproject.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +23,19 @@ public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    UserDao userDao;
+
 
     @Override
     public int getCurrentUserId() {
-        User userId = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userId.getId();
+         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (userDetails instanceof UserDetails) {
+            String login = userDetails.getUsername();
+            User user = userDao.findByUsername(login);
+            return user.getId();
+        }
+        return 0;
     }
 
     @Override

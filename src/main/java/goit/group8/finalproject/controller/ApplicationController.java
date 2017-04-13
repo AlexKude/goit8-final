@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 public class ApplicationController {
@@ -30,9 +31,10 @@ public class ApplicationController {
         return "applications";
     }
 
-    @RequestMapping(value = "/application/add/{project_id}", method = RequestMethod.POST)
-    public String addApp(@ModelAttribute("application") Application app, @PathVariable("project_id") int projId){
+    @RequestMapping(value = {"/application/add/{project_id}"}, method = RequestMethod.POST)
+    public String addApp(@Valid Application app, @PathVariable("project_id") int projId){
         if (app.getId() == 0) { //so there is no this app in DB
+
             this.appService.addApp(app, projId);
         }
         else {
