@@ -51,9 +51,9 @@
     </div>
 </sec:authorize>
 
-<sec:authorize access="isAuthenticated()">
+<%--<sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal.displayName" />
-</sec:authorize>
+</sec:authorize>--%>
 
 <div class="container">
 

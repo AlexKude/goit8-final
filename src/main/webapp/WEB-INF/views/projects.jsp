@@ -93,7 +93,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="col-md-offset-9">
-                                                <a href="<c:url value='/applications'/>">APPLY</a>
+                                                <a href="<c:url value='/applications/add/${project.id}'/>">APPLY</a>
                                             </span>
                                         </div>
                                     </div>

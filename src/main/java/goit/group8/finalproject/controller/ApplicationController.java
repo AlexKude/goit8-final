@@ -30,13 +30,13 @@ public class ApplicationController {
         return "applications";
     }
 
-    @RequestMapping(value = "/application/add", method = RequestMethod.POST)
-    public String addApp(@ModelAttribute("application") Application app){
+    @RequestMapping(value = "/application/add/{project_id}", method = RequestMethod.POST)
+    public String addApp(@ModelAttribute("application") Application app, @PathVariable("project_id") int projId){
         if (app.getId() == 0) { //so there is no this app in DB
-            this.appService.addApp(app);
+            this.appService.addApp(app, projId);
         }
         else {
-            this.appService.updateApp(app);
+            this.appService.updateApp(app, projId);
         }
 
         return "redirect:/applications";

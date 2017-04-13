@@ -109,11 +109,11 @@
         <div class="col-md-6 col-md-offset-4 panel-body">
             <h1>Add Application:</h1>
 
-            <c:url var="addAction" value="/application/add"/>
+            <c:url var="addAction" value="/application/add/{proj_id}"/>
 
             <form:form action="${addAction}" commandName="application">
                 <table class="table-responsive">
-                    <c:if test="${!empty application.project}">
+                    <c:if test="${!empty application.applydate}">
                         <tr>
                             <td>
                                 <form:label path="id">
@@ -126,7 +126,7 @@
                             </td>
                         </tr>
                     </c:if>
-                        <%-- <tr>
+                         <tr>
                              <td>
                                  <form:label path="project">
                                      <spring:message text="Project ID"/>
@@ -136,16 +136,7 @@
                                  <form:input path="project"/>
                              </td>
                          </tr>
-                         <tr>
-                             <td>
-                                 <form:label path="freelancer">
-                                     <spring:message text="Freelancer ID"/>
-                                 </form:label>
-                             </td>
-                             <td>
-                                 <form:input path="freelancer"/>
-                             </td>
-                         </tr>--%>
+
                     <tr>
                         <td>
                             <form:label path="note">

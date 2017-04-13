@@ -63,11 +63,11 @@ public class ApplicationServiceImpl implements ApplicationService {
         this.appDao = appDao;
     }
 
-   /* public void setSecurityService(SecurityService securityService) {
+    public void setSecurityService(SecurityService securityService) {
         this.securityService = securityService;
     }
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }*/
+    }
 }
