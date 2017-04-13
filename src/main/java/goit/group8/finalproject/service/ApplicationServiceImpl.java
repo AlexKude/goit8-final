@@ -1,6 +1,7 @@
 package goit.group8.finalproject.service;
 
 import goit.group8.finalproject.dao.ApplicationDao;
+import goit.group8.finalproject.dao.ProjectDao;
 import goit.group8.finalproject.dao.UserDao;
 import goit.group8.finalproject.model.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     ApplicationDao appDao;
 
     @Autowired
+    ProjectDao projectDao;
+
+    @Autowired
     UserDao userDao;
 
     @Autowired
@@ -24,15 +28,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     @Transactional("businessData")
-    public void addApp(Application a) throws NoSuchFieldException, IllegalAccessException {
+    public void addApp(Application a, int projId) {
         a.setApplydate(new Date());
         a.setFreelancer(userDao.getUserById(securityService.getCurrentUserId()));
+        a.setProject(projectDao.getProjectbyId(projId));
         appDao.addApp(a);
     }
 
     @Override
     @Transactional("businessData")
-    public void updateApp(Application a) {
+    public void updateApp(Application a, int projId) {
         appDao.updateApp(a);
     }
 
