@@ -11,5 +11,5 @@ public interface ProjectService {
     void removeProject(int id);
     Project getProjectbyId(int id);
     List<Project> showProjects();
-    List<Project> showProgectsByCustId(int id);
+    List<Project> showProjectsByCustId();
 }

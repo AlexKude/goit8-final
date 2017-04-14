@@ -58,8 +58,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional("businessData")
-    public List<Project> showProgectsByCustId(int id) {
-        return projectDao.showProjectsByCustId(id);
+    public List<Project> showProjectsByCustId() {
+
+        return projectDao.showProjectsByCustId(securityService.getCurrentUserId());
     }
 
     public void setProjectDao(ProjectDao projectDao) {

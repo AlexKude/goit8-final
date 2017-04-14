@@ -25,11 +25,9 @@ public class ProjectDaoImpl implements ProjectDao {
     @Override
     public void addProject(Project p) {
         Session session = sessionFactory.getCurrentSession();
-        if (p.getStatus() == null)
-        {
+        if (p.getStatus() == null) {
             ProjectStatus status = (ProjectStatus) session.get(ProjectStatus.class, new Integer(1));
-            if (status == null)
-            {
+            if (status == null) {
                 status = new ProjectStatus();
                 status.setStatus_name("created");
                 //status.setStatus_id(1);
@@ -38,14 +36,14 @@ public class ProjectDaoImpl implements ProjectDao {
             p.setStatus(status);
         }
         session.save(p);
-        logger.info("Goods are added successfully. Project details: "+ p);
+        logger.info("Goods are added successfully. Project details: " + p);
     }
 
     @Override
     public void updateProject(Project p) {
         Session session = sessionFactory.getCurrentSession();
         session.update(p);
-        logger.info("Project is updated successfully. Project details: "+ p);
+        logger.info("Project is updated successfully. Project details: " + p);
     }
 
     @Override
@@ -55,14 +53,14 @@ public class ProjectDaoImpl implements ProjectDao {
         if (p != null) {
             session.delete(p);
         }
-        logger.info("Project have been removed successfully. Project details: "+ p);
+        logger.info("Project have been removed successfully. Project details: " + p);
     }
 
     @Override
     public Project getProjectbyId(int id) {
         Session session = sessionFactory.getCurrentSession();
         Project p = (Project) session.load(Project.class, new Integer(id));//load by id
-        logger.info("Project has been loaded successfully. Project details: "+ p);
+        logger.info("Project has been loaded successfully. Project details: " + p);
         return p;
     }
 
@@ -71,8 +69,8 @@ public class ProjectDaoImpl implements ProjectDao {
     public List<Project> showProjects() {
         Session session = sessionFactory.getCurrentSession();
         List<Project> projectList = session.createQuery("from Project").list();
-        for (Project p : projectList){
-            logger.info("loaded project details: "+ p);
+        for (Project p : projectList) {
+            logger.info("loaded project details: " + p);
         }
 
         return projectList;
@@ -81,9 +79,14 @@ public class ProjectDaoImpl implements ProjectDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<Project> showProjectsByCustId(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        List<Project> projectListByCustId = session.createQuery("from " + Project.class.getName() + " p, "
-                + User.class.getName() + " u " +  "where u.id = p.user_id a and u.id = " + id ).list();
+        Session session = sessionFactory.openSession();
+        List<Project> projectListByCustId = session.createQuery("select p from " + Project.class.getName()
+                + " p, " + User.class.getName() + " u where u = p.customer and u.id = " + id).list();
+                /*createSQLQuery("SELECT p FROM users u, project p WHERE u.id = p.user_id AND u.id = " + id).list();*/
+
+                /*for (Project p : projectListByCustId) {
+            logger.info("loaded project details: " + p);
+        }*/
 
         return projectListByCustId;
     }
