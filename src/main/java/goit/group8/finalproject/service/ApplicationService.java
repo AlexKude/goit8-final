@@ -10,4 +10,6 @@ public interface ApplicationService {
     void removeApp(int id);
     Application getAppById(int id);
     List<Application> showAllApps();
+    List<Application> showAppsByFreelancer();
+    List<Application> showAppsByCustomer();
 }

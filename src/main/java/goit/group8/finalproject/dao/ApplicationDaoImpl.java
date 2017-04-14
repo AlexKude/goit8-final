@@ -63,4 +63,20 @@ public class ApplicationDaoImpl implements ApplicationDao {
         }
         return appList;
     }
+
+    @Override
+    public List<Application> showAppsByFreelancerId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Application> appListByFreelancer = session.createQuery("select a from " +
+                "Application a, User u where a.freelancer = u and u.id =" + id).list();
+        return appListByFreelancer;
+    }
+
+    @Override
+    public List<Application> showAppsByCustomerId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Application> appListByProject = session.createQuery("select p from " +
+                "Project p, Application a, User u where a.project = p and p.customer = u and u.id = " + id).list();
+        return appListByProject;
+    }
 }

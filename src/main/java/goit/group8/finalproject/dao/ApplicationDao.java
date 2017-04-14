@@ -10,4 +10,6 @@ public interface ApplicationDao {
     void removeApp(int id);
     Application getAppById(int id);
     List<Application> showAllApps();
+    List<Application> showAppsByFreelancerId(int id);
+    List<Application> showAppsByCustomerId(int id);
 }

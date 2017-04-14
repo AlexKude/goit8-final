@@ -31,7 +31,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public void addApp(Application a/*, int projId*/) {
         a.setApplydate(new Date());
         a.setFreelancer(userDao.getUserById(securityService.getCurrentUserId()));
-       /* a.setProject(projectDao.getProjectbyId(projId));*/
+       /* a.setProject(projectDao.getProjectbyId(projId));*/ /*Need to do!!!*/
         appDao.addApp(a);
     }
 
@@ -57,6 +57,18 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Transactional("businessData")
     public List<Application> showAllApps() {
         return appDao.showAllApps();
+    }
+
+    @Override
+    @Transactional("businessData")
+    public List<Application> showAppsByFreelancer() {
+        return appDao.showAppsByFreelancerId(securityService.getCurrentUserId());
+    }
+
+    @Override
+    @Transactional("businessData")
+    public List<Application> showAppsByCustomer() {
+        return appDao.showAppsByCustomerId(securityService.getCurrentUserId());
     }
 
     public void setAppDao(ApplicationDao appDao) {
