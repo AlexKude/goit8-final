@@ -19,7 +19,7 @@ public class TestProjectServiceImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(TestProjectServiceImpl.class);
 
-    private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("forTest.appconfig-root.xml");
+    private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("forTest.appconfig-data.xml");
     private ProjectServiceImpl service = (ProjectServiceImpl) applicationContext.getBean("ProjectServiceImpl");
 
     @Test

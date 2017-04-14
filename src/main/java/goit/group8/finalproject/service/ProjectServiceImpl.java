@@ -3,7 +3,6 @@ package goit.group8.finalproject.service;
 
 import goit.group8.finalproject.dao.ProjectDao;
 import goit.group8.finalproject.model.Project;
-import goit.group8.finalproject.model.ProjectStatus;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
