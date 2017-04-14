@@ -10,6 +10,7 @@ public interface ProjectDao {
     void removeProject(int id);
     Project getProjectbyId(int id);
     List<Project> showProjects();
+    List<Project> showProjectsByCustId(int id);
 }
 
 

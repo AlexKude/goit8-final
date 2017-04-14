@@ -56,6 +56,12 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.showProjects();
     }
 
+    @Override
+    @Transactional("businessData")
+    public List<Project> showProgectsByCustId(int id) {
+        return projectDao.showProjectsByCustId(id);
+    }
+
     public void setProjectDao(ProjectDao projectDao) {
         this.projectDao = projectDao;
     }

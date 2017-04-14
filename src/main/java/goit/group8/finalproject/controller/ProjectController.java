@@ -2,6 +2,7 @@ package goit.group8.finalproject.controller;
 
 import goit.group8.finalproject.model.Project;
 import goit.group8.finalproject.service.ProjectService;
+import goit.group8.finalproject.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProjectController {
     ProjectService projectService;
+
+    @Autowired
+    SecurityService securityService;
 
     @Autowired(required=true)
     @Qualifier(value="projectService")
@@ -57,5 +61,14 @@ public class ProjectController {
     public String projectData(@PathVariable("id") int id, Model model){ // we pass id and create model
         model.addAttribute("project", this.projectService.getProjectbyId(id));
         return "projectdata";//return projectData page
+    }
+
+    @RequestMapping(value = "/customer_projects", method = RequestMethod.GET)
+    public String listOfCustProjects(Model model){
+
+        model.addAttribute("project", new Project());
+        model.addAttribute("listOfCustProjects", this.projectService.showProgectsByCustId(securityService.getCurrentUserId()));
+
+        return "customer_projects";
     }
 }

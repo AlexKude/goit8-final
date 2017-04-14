@@ -9,3 +9,10 @@ INSERT INTO roles VALUES (3, 'ROLE_ADMIN');
 
 
 INSERT INTO user_roles VALUES (1, 3);
+
+INSERT INTO projectstatus VALUES (1, 'FREE');
+INSERT INTO projectstatus VALUES (2, 'UNDERWAY');
+INSERT INTO projectstatus VALUES (3, 'CLOSED');
+INSERT INTO projectstatus VALUES (4, 'AWAITING');
+INSERT INTO projectstatus VALUES (5, 'APPROVED');
+INSERT INTO projectstatus VALUES (6, 'DECLINE');

@@ -2,6 +2,7 @@ package goit.group8.finalproject.dao;
 
 import goit.group8.finalproject.model.Project;
 import goit.group8.finalproject.model.ProjectStatus;
+import goit.group8.finalproject.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -75,5 +76,15 @@ public class ProjectDaoImpl implements ProjectDao {
         }
 
         return projectList;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Project> showProjectsByCustId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Project> projectListByCustId = session.createQuery("from " + Project.class.getName() + " p, "
+                + User.class.getName() + " u " +  "where u.id = p.user_id a and u.id = " + id ).list();
+
+        return projectListByCustId;
     }
 }
