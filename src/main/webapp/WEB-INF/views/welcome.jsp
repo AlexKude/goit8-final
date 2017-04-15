@@ -47,7 +47,7 @@
 
 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
     <div class="container-fluid">
-        <a href="/applications" target="_self">Go to Applications List</a>
+        <a href="/customer_apps" target="_self">Go to Applications List</a>
     </div>
 </sec:authorize>
 

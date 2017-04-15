@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Project Data</title>
+    <title>Applications</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -26,24 +26,18 @@
 
 </head>
 <body>
-
-<sec:authorize access="hasRole('ROLE_GUEST')">
-    <a href="/" target="_self">Back to main page</a>
-</sec:authorize>
-
-<sec:authorize access="hasAnyRole('ROLE_FREELANCER','ROLE_CUSTOMER', 'ROLE_ADMIN')">
 <a href="/welcome" target="_self">Back to main menu</a>
-</sec:authorize>
+
 <br/>
 <br/>
 
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 panel-body">
-            <h1>Project Data:</h1>
-
+            <h1>Applications List</h1>
+            <c:if test="${!empty customerApps}">
                 <table class="table table-hover borderless table-stripedd">
-
+                    <c:forEach items="${customerApps}" var="application">
                         <tr>
                             <td>
                                 <div class="row">
@@ -55,7 +49,8 @@
                                                    data-o-event-logging
                                                    data-relevance='{}'
                                                    data-position="1"
-                                                   >${project.name}
+                                                   href="/userdata/${application.id}"
+                                                   target="_blank">${application.freelancer}
                                                 </a>
                                             </h2>
                                         </header>
@@ -64,65 +59,61 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
-                                            <strong class="js-type">Project ID: ${project.id}</strong>
-                                            <strong class="js-type">${project.cost}</strong>
+                                            <strong class="js-type">${application.project}</strong>
                                             -
-                                            <span>
-                                                    ${project.deadline}
-                                            </span>
-                                            -
+
                                             <span>Posted
-                                            ${project.startDate}
+                                            ${application.applydate}
                                         </span>
                                         </small>
                                         <div>
-                                                ${project.describe}
+                                                ${application.note}
                                         </div>
-                                        <div>
-                                                ${project.demands}
-                                        </div>
+
                                     </div>
                                 </div>
                                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="col-md-offset-1">
-                                                <a href="<c:url value='/edit/${project.id}'/>">Edit</a>
+                                                <a href="<c:url value='/edit_app/${application.id}'/>">Edit</a>
                                             </span>
                                             <span class="col-md-offset-9">
-                                                <a href="<c:url value='/remove/${project.id}'/>">Delete</a>
+                                                <a href="<c:url value='/remove_app/${application.id}'/>">Delete</a>
                                             </span>
                                         </div>
                                     </div>
                                 </sec:authorize>
-                                <sec:authorize access="hasRole('ROLE_FREELANCER')">
+
+                                <sec:authorize access="hasRole('ROLE_CUSTOMER')">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="col-md-offset-9">
-                                                <a href="<c:url value='/freelancer_apps'/>"${project.id} >APPLY</a>
+                                                <a href="<c:url value='/freelancers'/>">CHOOSE</a>  <%--To the /freelancers or to???--%>
                                             </span>
                                         </div>
                                     </div>
                                 </sec:authorize>
+
                             </td>
                         </tr>
-
+                    </c:forEach>
                 </table>
-
+            </c:if>
         </div>
     </div>
 </div>
 
-<%--<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_FREELANCER')">
     <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
-            <h1>Add Project:</h1>
+            <h1>Add Application:</h1>
 
-            <c:url var="addAction" value="/project/add"/>
+            <c:url var="addAction" value="/application/add"/>
 
-            <form:form action="${addAction}" commandName="project">
+            <form:form action="${addAction}" commandName="application">
                 <table class="table-responsive">
-                    <c:if test="${!empty project.name}">
+                    <c:if test="${!empty application.freelancer}">
                         <tr>
                             <td>
                                 <form:label path="id">
@@ -135,65 +126,36 @@
                             </td>
                         </tr>
                     </c:if>
+                        <%-- <tr>
+                             <td>
+                                 <form:label path="project">
+                                     <spring:message text="Project ID"/>
+                                 </form:label>
+                             </td>
+                             <td>
+                                 <form:input path="project"/>
+                             </td>
+                         </tr>--%>
+
                     <tr>
                         <td>
-                            <form:label path="name">
-                                <spring:message text="Project Name"/>
+                            <form:label path="note">
+                                <spring:message text="Note"/>
                             </form:label>
                         </td>
                         <td>
-                            <form:input path="name"/>
+                            <form:textarea path="note"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <form:label path="cost">
-                                <spring:message text="Cost"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:input path="cost"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="describe">
-                                <spring:message text="Project Description"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:textarea path="describe"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="demands">
-                                <spring:message text="Project Demands"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:textarea path="demands"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="deadline">
-                                <spring:message text="Deadline"/>
-                            </form:label>
-                        </td>
-                        <td>
-                            <form:input path="deadline"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <c:if test="${!empty project.name}">
+                            <c:if test="${!empty application.freelancer}">
                                 <input type="submit" class="form-control"
-                                       value="<spring:message text="Edit Project"/>"/>
+                                       value="<spring:message text="Edit Application"/>"/>
                             </c:if>
-                            <c:if test="${empty project.name}">
+                            <c:if test="${empty application.freelancer}">
                                 <input type="submit" class="form-control"
-                                       value="<spring:message text="Add Project"/>"/>
+                                       value="<spring:message text="Add Application"/>"/>
                             </c:if>
                         </td>
                     </tr>
@@ -201,7 +163,7 @@
             </form:form>
         </div>
     </div>
-</sec:authorize>--%>
+</sec:authorize>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

@@ -70,4 +70,18 @@ public class ApplicationController {
 
         return "freelancer_apps";
     }
+    @RequestMapping(value = "/customer_apps", method = RequestMethod.GET)
+    public String customerApps(Model model) {
+        model.addAttribute("application", new Application());
+        model.addAttribute("customerApps", this.appService.showAppsByCustomer());
+
+        return "customer_apps";
+    }
+    @RequestMapping(value = "/customer_apps/{id}", method = RequestMethod.GET)
+    public String appsByProjId(@PathVariable("id") int id,Model model) {
+        model.addAttribute("application", new Application());
+        model.addAttribute("customerApps", this.appService.showAppsByProjectId(id));
+
+        return "customer_apps";
+    }
 }

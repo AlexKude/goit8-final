@@ -75,7 +75,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
     @Override
     public List<Application> showAppsByCustomerId(int id) {
         Session session = sessionFactory.getCurrentSession();
-        List<Application> appListByCustomer = session.createQuery("select p from " +
+        List<Application> appListByCustomer = session.createQuery("select a from " +
                 "Project p, Application a, User u where a.project = p and p.customer = u and u.id = " + id).list();
         return appListByCustomer;
     }
@@ -83,7 +83,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
     @Override
     public List<Application> showAppsByProjectId(int id) {
         Session session = sessionFactory.getCurrentSession();
-        List<Application> appListByProject = session.createQuery("select p from " +
+        List<Application> appListByProject = session.createQuery("select a from " +
                 "Project p, Application a where a.project = p and p.id = " + id).list();
         return appListByProject;
     }

@@ -26,9 +26,13 @@
 
 </head>
 <body>
-<a href="/welcome" target="_self">Back to main menu</a>
+<sec:authorize access="hasRole('ROLE_GUEST')">
+     <a href="/" target="_self">Back to main page</a>
+</sec:authorize>
 
-<br/>
+<sec:authorize access="hasAnyRole('ROLE_FREELANCER','ROLE_CUSTOMER', 'ROLE_ADMIN')">
+    <a href="/welcome" target="_self">Back to main menu</a>
+</sec:authorize>
 <br/>
 
 <div class="container">
@@ -94,6 +98,16 @@
                                         <div class="col-md-12">
                                             <span class="col-md-offset-9">
                                                 <a href="<c:url value='/freelancer_apps'/>"${project.id} >APPLY</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </sec:authorize>
+
+                                <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="col-md-offset-9">
+                                                <a href="<c:url value='/customer_apps/${project.id}'/>" >APPLICATIONS</a>
                                             </span>
                                         </div>
                                     </div>

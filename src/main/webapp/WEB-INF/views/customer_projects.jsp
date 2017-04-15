@@ -98,6 +98,15 @@
                                         </div>
                                     </div>
                                 </sec:authorize>
+                                <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="col-md-offset-9">
+                                                <a href="<c:url value='/customer_apps/${project.id}'/>" >APPLICATIONS</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </sec:authorize>
                             </td>
                         </tr>
                     </c:forEach>

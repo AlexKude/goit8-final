@@ -10,17 +10,17 @@
     <http use-expressions="true">
         <!--intercept-url pattern="/" access="hasAnyRole(
          'IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED')"/-->
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN', 'ROLE_GUEST')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_FREELANCER', 'ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
-        <anonymous username="guest" granted-authority='ROLE_FREELANCER' />
+        <anonymous username="guest" granted-authority='ROLE_GUEST' />
         <!--remember-me /-->
 
         <form-login login-page="/welcome" default-target-url="/welcome" authentication-failure-url="/welcome?error"
                     username-parameter="login" password-parameter="password"/>
 
 
-        <logout logout-success-url="/welcome?logout"/>
+        <logout logout-success-url="/?logout"/>
     </http>
 
     <authentication-manager alias="authenticationManager">
