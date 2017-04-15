@@ -12,4 +12,5 @@ public interface ApplicationService {
     List<Application> showAllApps();
     List<Application> showAppsByFreelancer();
     List<Application> showAppsByCustomer();
+    List<Application> showAppsByProjectId(int id);
 }

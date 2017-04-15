@@ -28,10 +28,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     @Transactional("businessData")
-    public void addApp(Application a/*, int projId*/) {
+    public void addApp(Application a) {
         a.setApplydate(new Date());
         a.setFreelancer(userDao.getUserById(securityService.getCurrentUserId()));
+       
        /* a.setProject(projectDao.getProjectbyId(projId));*/ /*Need to do!!!*/
+
         appDao.addApp(a);
     }
 
@@ -70,6 +72,12 @@ public class ApplicationServiceImpl implements ApplicationService {
     public List<Application> showAppsByCustomer() {
         return appDao.showAppsByCustomerId(securityService.getCurrentUserId());
     }
+
+    @Override
+    public List<Application> showAppsByProjectId(int id) {
+        return appDao.showAppsByProjectId(id);
+    }
+
 
     public void setAppDao(ApplicationDao appDao) {
         this.appDao = appDao;

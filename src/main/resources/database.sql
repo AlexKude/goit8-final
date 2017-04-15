@@ -16,3 +16,7 @@ INSERT INTO projectstatus VALUES (3, 'CLOSED');
 INSERT INTO projectstatus VALUES (4, 'AWAITING');
 INSERT INTO projectstatus VALUES (5, 'APPROVED');
 INSERT INTO projectstatus VALUES (6, 'DECLINE');
+
+ALTER TABLE application ADD COLUMN status_id INT
+      REFERENCES projectstatus (status_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;

@@ -12,4 +12,5 @@ public interface ApplicationDao {
     List<Application> showAllApps();
     List<Application> showAppsByFreelancerId(int id);
     List<Application> showAppsByCustomerId(int id);
+    List<Application> showAppsByProjectId(int id);
 }
