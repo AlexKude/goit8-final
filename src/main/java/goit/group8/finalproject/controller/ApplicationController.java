@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ApplicationController {
 
+    @Autowired
     ApplicationService appService;
 
     @Autowired(required = true)

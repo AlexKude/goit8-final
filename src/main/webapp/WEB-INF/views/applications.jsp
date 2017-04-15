@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Project List</title>
+    <title>Applications</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -34,7 +34,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 panel-body">
-            <h1>Applicants List</h1>
+            <h1>Applications List</h1>
             <c:if test="${!empty listApps}">
                 <table class="table table-hover borderless table-stripedd">
                     <c:forEach items="${listApps}" var="application">
@@ -113,7 +113,7 @@
 
             <form:form action="${addAction}" commandName="application">
                 <table class="table-responsive">
-                    <c:if test="${!empty application.applydate}">
+                    <c:if test="${!empty application.freelancer}">
                         <tr>
                             <td>
                                 <form:label path="id">
@@ -147,17 +147,17 @@
                             <form:textarea path="note"/>
                         </td>
                     </tr>
-
-                    <td>
-                        <c:if test="${!empty application.applydate}">
-                            <input type="submit" class="form-control"
-                                   value="<spring:message text="Edit Application"/>"/>
-                        </c:if>
-                        <c:if test="${empty application.applydate}">
-                            <input type="submit" class="form-control"
-                                   value="<spring:message text="Add Application"/>"/>
-                        </c:if>
-                    </td>
+                    <tr>
+                        <td>
+                            <c:if test="${!empty application.freelancer}">
+                                <input type="submit" class="form-control"
+                                       value="<spring:message text="Edit Application"/>"/>
+                            </c:if>
+                            <c:if test="${empty application.freelancer}">
+                                <input type="submit" class="form-control"
+                                       value="<spring:message text="Add Application"/>"/>
+                            </c:if>
+                        </td>
                     </tr>
                 </table>
             </form:form>

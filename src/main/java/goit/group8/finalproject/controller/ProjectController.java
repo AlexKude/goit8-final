@@ -18,9 +18,6 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @Autowired
-    private SecurityService securityService;
-
     @Autowired(required = true)
     @Qualifier(value = "projectService")
     public void setProjectService(ProjectService projectService) {
@@ -68,7 +65,6 @@ public class ProjectController {
 
     @RequestMapping(value = "/customer_projects", method = RequestMethod.GET)
     public String listOfCustProjects(Model model) {
-       /* Integer id = securityService.getCurrentUserId();*/
         model.addAttribute("project", new Project());
         model.addAttribute("listOfCustProjects", this.projectService.showProjectsByCustId());
 

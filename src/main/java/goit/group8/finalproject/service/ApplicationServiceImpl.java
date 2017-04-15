@@ -31,7 +31,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public void addApp(Application a) {
         a.setApplydate(new Date());
         a.setFreelancer(userDao.getUserById(securityService.getCurrentUserId()));
-       
+
        /* a.setProject(projectDao.getProjectbyId(projId));*/ /*Need to do!!!*/
 
         appDao.addApp(a);

@@ -140,6 +140,14 @@ public class Project implements Serializable{
         this.notes = notes;
     }
 
+    public Set<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
