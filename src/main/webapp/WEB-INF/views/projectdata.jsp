@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Project List</title>
+    <title>Project Data</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -34,10 +34,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 panel-body">
-            <h1>Freelance jobs</h1>
-            <c:if test="${!empty listProjects}">
+            <h1>Project Data:</h1>
+
                 <table class="table table-hover borderless table-stripedd">
-                    <c:forEach items="${listProjects}" var="project">
+
                         <tr>
                             <td>
                                 <div class="row">
@@ -49,7 +49,7 @@
                                                    data-o-event-logging
                                                    data-relevance='{}'
                                                    data-position="1"
-                                                   href="/projectdata/${project.id}" target="_blank">${project.name}
+                                                   >${project.name}
                                                 </a>
                                             </h2>
                                         </header>
@@ -100,14 +100,14 @@
                                 </sec:authorize>
                             </td>
                         </tr>
-                    </c:forEach>
+
                 </table>
-            </c:if>
+
         </div>
     </div>
 </div>
 
-<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
+<%--<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
     <div class="row">
         <div class="col-md-6 col-md-offset-4 panel-body">
             <h1>Add Project:</h1>
@@ -195,7 +195,7 @@
             </form:form>
         </div>
     </div>
-</sec:authorize>
+</sec:authorize>--%>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

@@ -43,7 +43,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>goit.group8.finalproject.model.Role</value>
-                <value>goit.group8.finalproject.model.ProjectStatus</value>
+                <value>goit.group8.finalproject.model.Status</value>
                 <value>goit.group8.finalproject.model.User</value>
                 <value>goit.group8.finalproject.model.Project</value>
                 <value>goit.group8.finalproject.model.Application</value>
@@ -92,6 +92,12 @@
             <ref bean="userDao"/>
         </property>
 
+    </bean>
+
+    <bean id="statusDao" class="goit.group8.finalproject.dao.StatusDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

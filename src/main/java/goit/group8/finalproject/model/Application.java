@@ -3,7 +3,6 @@ package goit.group8.finalproject.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name="application")
@@ -30,7 +29,7 @@ public class Application implements Serializable{
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn (name = "status_id")
-    ProjectStatus status;
+    Status status;
 
     public Application() {
     }
@@ -75,11 +74,11 @@ public class Application implements Serializable{
         this.project = project;
     }
 
-    public ProjectStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(ProjectStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

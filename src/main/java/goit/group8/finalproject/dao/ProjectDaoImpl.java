@@ -1,7 +1,7 @@
 package goit.group8.finalproject.dao;
 
 import goit.group8.finalproject.model.Project;
-import goit.group8.finalproject.model.ProjectStatus;
+import goit.group8.finalproject.model.Status;
 import goit.group8.finalproject.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,9 +26,9 @@ public class ProjectDaoImpl implements ProjectDao {
     public void addProject(Project p) {
         Session session = sessionFactory.getCurrentSession();
         if (p.getStatus() == null) {
-            ProjectStatus status = (ProjectStatus) session.get(ProjectStatus.class, new Integer(1));
+            Status status = (Status) session.get(Status.class, new Integer(1));
             if (status == null) {
-                status = new ProjectStatus();
+                status = new Status();
                 status.setStatus_name("created");
                 //status.setStatus_id(1);
                 session.save(status);

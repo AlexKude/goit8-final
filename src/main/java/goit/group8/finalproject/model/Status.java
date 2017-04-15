@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "projectstatus")
-public class ProjectStatus implements Serializable {
+public class Status implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class ProjectStatus implements Serializable {
     @Column(name = "status_name")
     private String status_name;
 
-    public ProjectStatus() {
+    public Status() {
     }
 
     public int getStatus_id() {

@@ -2,7 +2,6 @@ package goit.group8.finalproject.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -31,7 +30,7 @@ public class Project implements Serializable{
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn (name = "status_id")
-    ProjectStatus status;
+    Status status;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -100,11 +99,11 @@ public class Project implements Serializable{
         this.deadline = deadline;
     }
 
-    public ProjectStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(ProjectStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

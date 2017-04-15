@@ -57,6 +57,12 @@
     </div>
 </sec:authorize>
 
+<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_FREELANCER')">
+    <div class="container-fluid">
+        <a href="/freelancer_apps" target="_self">My Applications</a>
+    </div>
+</sec:authorize>
+
 
 <%--<sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal.displayName" />

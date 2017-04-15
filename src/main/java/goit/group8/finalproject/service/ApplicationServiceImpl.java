@@ -2,6 +2,7 @@ package goit.group8.finalproject.service;
 
 import goit.group8.finalproject.dao.ApplicationDao;
 import goit.group8.finalproject.dao.ProjectDao;
+import goit.group8.finalproject.dao.StatusDao;
 import goit.group8.finalproject.dao.UserDao;
 import goit.group8.finalproject.model.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     UserDao userDao;
 
     @Autowired
+    StatusDao statusDao;
+
+    @Autowired
     SecurityService securityService;
 
     @Override
@@ -31,7 +35,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public void addApp(Application a) {
         a.setApplydate(new Date());
         a.setFreelancer(userDao.getUserById(securityService.getCurrentUserId()));
-
+        a.setStatus(statusDao.findById(4));
        /* a.setProject(projectDao.getProjectbyId(projId));*/ /*Need to do!!!*/
 
         appDao.addApp(a);

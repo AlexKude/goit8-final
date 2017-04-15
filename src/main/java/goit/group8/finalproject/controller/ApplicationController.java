@@ -40,7 +40,7 @@ public class ApplicationController {
             this.appService.updateApp(app);
         }
 
-        return "redirect:/applications";
+        return "redirect:/freelancer_apps";
     }
 
 
