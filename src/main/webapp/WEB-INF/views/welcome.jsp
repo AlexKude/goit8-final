@@ -29,39 +29,43 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <a href="/projects" target="_self">Go to Project list</a>
+<div class="container">
+<div class="btn-group btn-group-justified" role="group" area-label=" ">
+<div class="btn-group" role="group">
+    <a href="/projects" target="_self">Project list</a>
 </div>
 
 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_FREELANCER', 'ROLE_CUSTOMER')">
-    <div class="container-fluid">
-        <a href="/freelancers" target="_self">Go to Freelancer List</a>
-    </div>
-</sec:authorize>
-
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    <div class="container-fluid">
-        <a href="/admin" target="_self">Go to Admin Page</a>
+    <div class="btn-group" role="group">    
+        <a href="/freelancers" target="_self" class="header-link-signup">Freelancer List</a>
     </div>
 </sec:authorize>
 
 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
-    <div class="container-fluid">
-        <a href="/customer_apps" target="_self">Go to Applications List</a>
+    <div class="btn-group" role="group">    
+        <a href="/customer_apps" target="_self">Applications List</a>
     </div>
 </sec:authorize>
 
 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')">
-    <div class="container-fluid">
+    <div class="btn-group" role="group">    
         <a href="/customer_projects" target="_self">My Projects</a>
     </div>
 </sec:authorize>
 
 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_FREELANCER')">
-    <div class="container-fluid">
+    <div class="btn-group" role="group">    
         <a href="/freelancer_apps" target="_self">My Applications</a>
     </div>
 </sec:authorize>
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <div class="btn-group" role="group">
+        <a href="/admin" target="_self">Admin Page</a>
+    </div>
+</sec:authorize>
+</div>
+</div>
 
 
 <%--<sec:authorize access="isAuthenticated()">
