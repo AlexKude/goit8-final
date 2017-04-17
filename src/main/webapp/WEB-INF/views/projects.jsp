@@ -97,8 +97,21 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="col-md-offset-9">
-                                                <a href="<c:url value='/freelancer_apps'/>"${project.id} >APPLY</a>
-                                            </span>
+                                                <a href="#" onClick="ApplyDiv(${project.id});">APPLY</a>
+					                        </span>
+					                        <div class="col-md-12" id="proposal${project.id}" class="col-md-offset-1" style="display:none">
+                                                <form id="formprop${project.id}" action='/project/apply' method="post">
+						                        <div class="col-md-12">
+                                                    <input type="hidden" name="id" id="id" value="${project.id}" />
+						                            <textarea class="col-md-8" name="proptext" id="proptext" rows="7"></textarea>
+						                        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									</div>
+                                                <div class="col-md-12">
+							                        <input class="col-md-offset-4 col-md-2" type="submit" value="Submit proposal"/>
+							                        <input class="col-md-2" type="button${project.id}" name="cancel${project.id}" value="cancel" onClick="ApplyDiv(${project.id})" />
+						                        </div>
+						                        </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </sec:authorize>
@@ -213,5 +226,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+
+
+<script>
+    function ApplyDiv(projectid) {
+	var el = $("#proposal"+projectid);
+	var s =  el.css("display");
+	if (s=="none"){
+		el.attr('style','display:block');//el.css("display","block");
+	} else {
+		el.attr('style','display:none');//el.css("display","none");
+	}
+    }
+
+</script>
+
 </body>
 </html>

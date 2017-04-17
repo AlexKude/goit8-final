@@ -1,6 +1,8 @@
 package goit.group8.finalproject.controller;
 
+import goit.group8.finalproject.model.Application;
 import goit.group8.finalproject.model.Project;
+import goit.group8.finalproject.service.ApplicationService;
 import goit.group8.finalproject.service.ProjectService;
 import goit.group8.finalproject.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ApplicationService appService;
 
     @Autowired(required = true)
     @Qualifier(value = "projectService")
@@ -61,6 +66,17 @@ public class ProjectController {
 
     @RequestMapping("/edit/{id}")
     public String editProject(@PathVariable("id") int id, Model model) { // we pass id and create model
+        model.addAttribute("project", this.projectService.getProjectbyId(id));
+        model.addAttribute("listProjects", this.projectService.showProjects());
+        return "projects";
+    }
+
+    @RequestMapping("/project/apply")
+    public String applyProject(@RequestParam("id") int id, @RequestParam("proptext") String proptext , Model model) { // we pass id and create model
+        Application app = new Application();
+        app.setProject(this.projectService.getProjectbyId(id));
+        app.setNote(proptext);
+        appService.addApp(app);
         model.addAttribute("project", this.projectService.getProjectbyId(id));
         model.addAttribute("listProjects", this.projectService.showProjects());
         return "projects";

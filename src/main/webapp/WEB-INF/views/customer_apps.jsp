@@ -50,7 +50,7 @@
                                                    data-relevance='{}'
                                                    data-position="1"
                                                    href="/userdata/${application.id}"
-                                                   target="_blank">${application.freelancer}
+                                                   target="_blank">${application.freelancer.firstName} ${application.freelancer.secondName}
                                                 </a>
                                             </h2>
                                         </header>
@@ -59,7 +59,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <small class="text-muted display-inline-block m-sm-bottom m-sm-top">
-                                            <strong class="js-type">${application.project}</strong>
+                                            <strong class="js-type">${application.project.name}</strong>
                                             -
 
                                             <span>Posted

@@ -157,20 +157,6 @@ public class UserController {
         return "userdata";//return userData page
     }
 
-    /*@org.springframework.web.bind.annotation.InitBinder("userForm")
-    protected void initBinder(
-            org.springframework.web.bind.WebDataBinder binder) {
-        binder.registerCustomEditor(Role.class, new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) {
-                Role r = new Role();
-                r.setId(Long.parseLong(text));
-                setValue(r);
-            }
-        });
-    }*/
-
-
     @InitBinder({"user","userForm","role","roles"})
     protected void initBinder(WebDataBinder binder) {
         /*binder.registerCustomEditor(Set.class, "roles", new CustomCollectionEditor(Set.class)

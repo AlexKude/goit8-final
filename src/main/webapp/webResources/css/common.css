@@ -46,3 +46,9 @@ body {
 .has-error {
     color: red
 }
+
+.fake-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

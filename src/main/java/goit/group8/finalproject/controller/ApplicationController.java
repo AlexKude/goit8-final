@@ -79,7 +79,7 @@ public class ApplicationController {
     }
     @RequestMapping(value = "/customer_apps/{id}", method = RequestMethod.GET)
     public String appsByProjId(@PathVariable("id") int id,Model model) {
-        model.addAttribute("application", new Application());
+        //model.addAttribute("application", new Application());
         model.addAttribute("customerApps", this.appService.showAppsByProjectId(id));
 
         return "customer_apps";

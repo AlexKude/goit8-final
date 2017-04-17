@@ -78,6 +78,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
+    @Transactional("businessData")
     public List<Application> showAppsByProjectId(int id) {
         return appDao.showAppsByProjectId(id);
     }
