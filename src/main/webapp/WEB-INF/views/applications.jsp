@@ -49,8 +49,8 @@
                                                    data-o-event-logging
                                                    data-relevance='{}'
                                                    data-position="1"
-                                                   href="/userdata/${application.id}"
-                                                   target="_blank">${application.freelancer}
+                                                   href="/userdata/${application.freelancer.id}"
+                                                   target="_blank">${application.freelancer.login}
                                                 </a>
                                             </h2>
                                         </header>
